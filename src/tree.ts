@@ -50,9 +50,10 @@ export function source2tree<
   }
 
   // Get the field names or use defaults. 
-  const _id = names?._id ?? defs?._id;
-  const _parentid = names?._parent ?? defs?._parentid;
-  const _children = names?._children ?? defs?._children;
+  const _id = names?._id ?? defs?._id as keyof T;
+  const _parentid = names?._parent ?? defs?._parentid as keyof T;
+  
+  const _children = names?._children ?? defs?._children as C;
 
   // Initialize the tree structure and helper maps. 
   const tree: CurrentNode[] = [];

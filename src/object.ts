@@ -24,9 +24,8 @@ export function omit<T extends object, S = never>(
   const res = assign<Res>(source);
 
   for (const key in res) {
-    const _val = res[key];
-    const _key = key as ExcludeKey<T, S>;
-    if (condition(_val, _key)) delete res[key];
+    const _key = key as keyof Res;
+    if (condition(res[_key], _key)) delete res[_key];
   }
 
   return res as Res;
