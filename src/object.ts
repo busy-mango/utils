@@ -9,6 +9,11 @@ export function assign<T = unknown>(...source: Partial<T>[]): T {
   return Object.assign({}, ...source) as T;
 }
 
+interface AssertFunc<T extends object, S = never>{
+  (val: unknown, key: ExcludeKey<T, S>): boolean,
+  (val: unknown, key: ExcludeKey<T, S>): val is S,
+}
+
 /**
  * Creates a new object by omitting properties from the source object
  * that satisfy the given condition function.
@@ -18,7 +23,7 @@ export function assign<T = unknown>(...source: Partial<T>[]): T {
  */
 export function omit<T extends object, S = never>(
   source: T,
-  condition: (val: unknown, key: ExcludeKey<T, S>) => boolean,
+  condition: AssertFunc<T, S>,
 ) {
   type Res = OmitBy<T, S>;
   const res = assign<Res>(source);

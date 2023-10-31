@@ -77,6 +77,13 @@ export type PartialPick<T, K extends keyof T> = {
   [P in K]?: T[P];
 }
 
+/**
+ * Utility type. 
+ */
+export type PartialRecord<K extends keyof any, T> = {
+  [P in K]?: T;
+};
+
 /** 
  * Utility type.
  * It creates a new type by checking if `A` extends `B`, and if true, returns `A`, otherwise returns `B`. 

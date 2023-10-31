@@ -1,3 +1,5 @@
+import { PartialRecord } from "./types";
+
 /** 
  * Create a dom and set attribute
  * @param {string} name - dom tag name
@@ -7,13 +9,13 @@
  */ 
 function create(
   name: string,
-  attrs: Record<string, string>,
+  attrs: PartialRecord<string, string>,
   container?: HTMLElement,
 ) {
   const tag = document.createElement(name);
 
   Object.entries(attrs).forEach((args) => {
-    tag.setAttribute(...args);
+    tag.setAttribute(...args as [string, string]);
   });
 
   container && container.append(tag);
