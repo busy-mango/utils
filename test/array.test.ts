@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import{ isArray, isValidKey, isString } from '@busymango/is-esm';
-import { compact, theLast, dedup, includes } from '../src/array';
+import { compact, theLast, dedup, includes, shuffle, sample } from '../src/array';
 
 describe('compact should remove falsey values from the array', () => {
   it('', () => {
@@ -85,5 +85,60 @@ describe('includes should check if the array includes an element that satisfies 
       (value) => value === 'grape'),
     ).toBeFalsy();
     expect(includes([], (value) => value === 1)).toBeFalsy();
+  });
+});
+
+describe('shuffle', () => {
+  it('should shuffle the elements of the array', () => {
+    const source = [1, 2, 3, 4, 5];
+    const res = shuffle(source);
+    expect(res).not.toStrictEqual(source);
+    expect(res).toHaveLength(source.length);
+    expect(new Set(res)).toStrictEqual(new Set(source));
+  });
+
+  it('should return an empty array when the input array is empty', () => {
+    const source: number[] = [];
+    const res = shuffle(source);
+    expect(res).toEqual(source);
+  });
+});
+
+describe('shuffle', () => {
+  it('should shuffle the elements of the array', () => {
+    const source = [1, 2, 3, 4, 5];
+    const res = shuffle(source);
+    expect(res).not.toStrictEqual(source);
+    expect(res).toHaveLength(source.length);
+    expect(new Set(res)).toStrictEqual(new Set(source));
+  });
+
+  it('should return an empty array when the input array is empty', () => {
+    const source: number[] = [];
+    const res = shuffle(source);
+    expect(res).toEqual(source);
+  });
+});
+
+describe('sample', () => {
+  it('should return a random sample of elements from the array', () => {
+    const size = 3;
+    const source = [1, 2, 3, 4, 5];
+    const res = sample(source, size);
+    
+    expect(res).toHaveLength(size);
+    expect(source).toContain(res[0]);
+    expect(source).toContain(res[1]);
+    expect(source).toContain(res[2]);
+  });
+
+  it('should return an empty array when the input array is empty', () => {
+    const source: number[] = [];
+    expect(sample(source)).toEqual(source);
+  });
+
+  it('should return an empty array when the size is less than 1', () => {
+    const source = [1, 2, 3, 4, 5];
+    expect(sample(source, -1)).toEqual([]);
   });
 });

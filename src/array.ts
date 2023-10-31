@@ -51,3 +51,38 @@ export function includes<T = unknown>(
 ): boolean {
   return source.findIndex(predicate) >= 0;
 }
+
+/**
+ * Shuffles an array using the Fisher-Yates algorithm.
+ * @param source The array to shuffle.
+ * @returns The shuffled array.
+ */
+export function shuffle<T = unknown>(source: T[] = []): T[] {
+  // Create a copy of the source array to avoid modifying the original array
+  const res = [...source];
+  // Loop through the array in reverse order
+  for (let i = res.length - 1; i > 0; i--) {
+    // Generate a random index between 0 and i (inclusive)
+    const j = Math.floor(Math.random() * (i + 1));
+    // Swap the elements at indices i and j
+    [res[i], res[j]] = [res[j], res[i]];
+  }
+  // Return the shuffled array
+  return res;
+}
+
+/**
+ * Returns a random sample of elements from the given array.
+ * @param source The array to sample from.
+ * @param size The number of elements to include in the sample. Defaults to 1.
+ * @returns An array containing the sampled elements.
+ */
+export function sample<T = unknown>(
+  source: T[] = [],
+  size: number = 1,
+): T[] {
+  // If size is less than 1, return an empty array
+  if (!(size >= 1)) return [];
+  // Shuffle the source array & Return a portion of the shuffled array with the specified size
+  return shuffle(source).slice(0, size); 
+}
