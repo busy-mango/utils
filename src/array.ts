@@ -1,4 +1,4 @@
-import { isNil } from "@busymango/is-esm";
+import { isNil, isNotUndefined } from "@busymango/is-esm";
 
 import type { ComparatorFunc, FalseValue } from "./types";
 
@@ -85,4 +85,21 @@ export function sample<T = unknown>(
   if (!(size >= 1)) return [];
   // Shuffle the source array & Return a portion of the shuffled array with the specified size
   return shuffle(source).slice(0, size); 
+}
+
+/**
+ * Combines multiple arrays into a single array of tuples, where the i-th tuple contains
+ * the i-th element from each of the input arrays.
+ *
+ * @param source The arrays to be combined.
+ * @returns An array of tuples.
+ */
+export function zip<T = unknown>(...source: T[][]) {
+  // Find the maximum length of the input arrays.
+  const max = Math.max(...source.map((e => e.length)));
+  
+  // Create an array of tuples, where the i-th tuple contains the i-th element from each of the input arrays.
+  return Array.from({ length: max }).map(
+    (_, i) => source.map(e => e[i]).filter(isNotUndefined),
+  );
 }

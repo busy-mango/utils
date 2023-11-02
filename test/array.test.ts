@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import{ isArray, isValidKey, isString } from '@busymango/is-esm';
-import { compact, theLast, dedup, includes, shuffle, sample } from '../src/array';
+import { compact, theLast, dedup, includes, shuffle, sample, zip } from '../src/array';
 
 describe('compact should remove falsey values from the array', () => {
   it('', () => {
@@ -140,5 +140,38 @@ describe('sample', () => {
   it('should return an empty array when the size is less than 1', () => {
     const source = [1, 2, 3, 4, 5];
     expect(sample(source, -1)).toEqual([]);
+  });
+});
+
+describe('zip', () => {
+  it('should zip arrays correctly', () => {
+    const zipped = zip<string | number | boolean>(
+      [1, 2, 3],
+      ['a', 'b', 'c'],
+      [true, false, true],
+    );
+
+    expect(zipped).toEqual([
+      [1, 'a', true],
+      [2, 'b', false],
+      [3, 'c', true]
+    ]);
+  });
+
+  it('should handle arrays of different lengths', () => {
+    const zipped = zip<string | number | boolean>(
+      [1, 2, 3], 
+      ['a', 'b'],
+      [true, false, true, false],
+    );
+
+    const expected = [
+      [1, 'a', true],
+      [2, 'b', false],
+      [3, true],
+      [false]
+    ];
+
+    expect(zipped).toStrictEqual(expected);
   });
 });
