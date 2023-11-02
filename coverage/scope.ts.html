@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for logic.ts</title>
+    <title>Code coverage report for scope.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> logic.ts</h1>
+        <h1><a href="index.html">All files</a> scope.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>40/40</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>40/40</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -96,14 +96,7 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -112,11 +105,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -128,8 +118,6 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -138,50 +126,41 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { isNonEmptyArray } from '@busymango/is-esm';
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { zip } from "./array";
+import { and, or } from "./logic";
+import { Split } from "./types";
 &nbsp;
-/**
- * Checks if all elements in the source array satisfy the given predicate.
- * @param source The array to check.
- * @param predicate The function used to test each element.
- * @returns True if all elements satisfy the predicate, false otherwise.
- */
-export function and&lt;T = unknown&gt;(
-  source: T[],
-  predicate: (val: T) =&gt; boolean,
-) {
-  return isNonEmptyArray(source) &amp;&amp; source.every(predicate);
-}
+export class Scope&lt;K extends string&gt; {
+   /**
+   * Converts the source string into an array by splitting it with the ':' delimiter.
+   * @param source The source string to be converted.
+   * @returns An array of strings.
+   */
+  public convert = (source: K) =&gt; source.split(':') as Split&lt;K&gt;;
 &nbsp;
-/**
- * Checks if any element in the source array satisfies the given predicate.
- * @param source The array to check.
- * @param predicate The function used to test each element.
- * @returns True if any element satisfies the predicate, false otherwise.
- */
-export function or&lt;T = unknown&gt;(
-  source: T[],
-  predicate: (val: T) =&gt; boolean,
-) {
-  return source.some(predicate);
-}
+  /**
+   * Checks if the define and current values match.
+   * @param define The define value to be compared.
+   * @param current The current value to be compared.
+   * @returns A boolean indicating whether the values match.
+   */
+  public isMatch = (define: K, current: K) =&gt; and(
+    zip(this.convert(define), this.convert(current)),
+    ([def, cur]) =&gt; def === '*' || def === cur,
+  )
 &nbsp;
-/**
- * Returns the source value if it is not equal to false, otherwise returns the placeholder value.
- * @param source The value to check.
- * @param placeholder The value to return if the source is false.
- * @returns The source value if it is not false, otherwise the placeholder value or undefined.
- */
-export function ifnot&lt;T = unknown, D = never&gt;(
-  source: T | false,
-  placeholder?: D,
-): T | D | undefined {
-  return source !== false ? source : placeholder ?? undefined;
+  /**
+   * Checks if the current value is contained within the defines array.
+   * @param defines An array of define values.
+   * @param current The current value to be checked.
+   * @returns A boolean indicating whether the current value is contained within the defines array.
+   */
+  public isContain = (defines: K[], current: K) =&gt; (
+    or(defines, (cur) =&gt; this.isMatch(cur, current))
+  )
 }
 &nbsp;</pre></td></tr></table></pre>
 

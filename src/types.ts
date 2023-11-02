@@ -1,7 +1,8 @@
-
-
-/** define `Y` or `N` */
+/** Define `Y` or `N` */
 export type YesOrNo = "Y" | "N";
+
+/** Define predicate */
+export type Predicate = "read" | "create" | "update" | "delete";
 
 /** 
  * Defines the valid values for the charset. It can only be one of the following: `UTF-8`, `UTF-16`, or `UTF-32`. 
@@ -130,3 +131,21 @@ export type Split<
 > = SplitCall<A, D> extends infer X
   ? Cast<X, string[]>
   : never;
+
+/**
+ * Define a type called Assemble that takes two type parameters:
+ * - T: the object type being assembled
+ * - K: the keys of the object type T that should be included in the assembled type
+ */
+export type Assemble<T, K extends keyof T = keyof T> = K extends string
+  // If K is a string (i.e. not a union type), return either K or a recursive call to Assemble
+  ? K | (T[K] extends object ? `${K}:${Assemble<T[K]>}` : never)
+  // Otherwise, return never
+  : never;
+
+/**
+ * Define a type called KeyPath that takes two type parameters:
+ * - T: the object type being assembled
+ * - P: a string literal type that represents the predicate for filtering keys of T
+ */ 
+export type KeyPath<T, P extends string = Predicate> = `${Assemble<T>}:${P | '*' | '!'}`;
