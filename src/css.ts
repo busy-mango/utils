@@ -8,7 +8,7 @@ import { isNonEmptyString } from '@busymango/is-esm';
  * @param params.element The HTML element to compute the CSS variable value from. Defaults to document.body. 
  * @returns The value of the CSS variable if found, otherwise the initial value or undefined. 
  */
-export function getCSSVariable<N extends string = string>(
+export function theCSSVariable<N extends string = string>(
   name?: N,
   params?: {
     initial?: string;

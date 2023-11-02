@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1698742215728" clover="3.2.0">
-  <project timestamp="1698742215729" name="All files">
+<coverage generated="1698904360067" clover="3.2.0">
+  <project timestamp="1698904360068" name="All files">
     <metrics statements="468" coveredstatements="458" conditionals="65" coveredconditionals="58" methods="22" coveredmethods="22" elements="555" coveredelements="538" complexity="0" loc="468" ncloc="468" packages="1" files="7" classes="7"/>
     <file name="array.ts" path="/Users/mangosetsuna/Workspace/busymango/utils/src/array.ts">
       <metrics statements="88" coveredstatements="88" conditionals="16" coveredconditionals="16" methods="7" coveredmethods="7"/>
