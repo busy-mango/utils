@@ -3,7 +3,7 @@ import { and, or } from "./logic";
 import { Split } from "./types";
 
 export class Scope<K extends string> {
-   /**
+  /**
    * Converts the source string into an array by splitting it with the ':' delimiter.
    * @param source The source string to be converted.
    * @returns An array of strings.

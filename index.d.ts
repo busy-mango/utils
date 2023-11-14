@@ -9,3 +9,4 @@ export * from './src/parse';
 export * from './src/string';
 export * from './src/tree';
 export * from './src/types';
+export * from './src/scope';
