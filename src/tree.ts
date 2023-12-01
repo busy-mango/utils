@@ -2,13 +2,15 @@ import { ExtractKey } from "./types";
 
 import { isNil, isArray } from '@busymango/is-esm';
 
+type Key = string | number | bigint;
+
 /** 
  * Defines the fields for a node in the tree structure. 
  */
 type NodeFields<T, C> = {
   _children?: C;
-  _id?: Extract<ExtractKey<T, string>, string>;
-  _parent?: Extract<ExtractKey<T, string | undefined>, string>;
+  _id?: Extract<ExtractKey<T, Key>, string>;
+  _parent?: Extract<ExtractKey<T, Key | undefined>, string>;
 }
 
 /** 

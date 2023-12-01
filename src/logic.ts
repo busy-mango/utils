@@ -32,9 +32,9 @@ export function or<T = unknown>(
  * @param placeholder The value to return if the source is false.
  * @returns The source value if it is not false, otherwise the placeholder value or undefined.
  */
-export function ifnot<T = unknown, D = never>(
+export function ifnot<T = unknown, D = undefined>(
   source: T | false,
   placeholder?: D,
-): T | D | undefined {
-  return source !== false ? source : placeholder ?? undefined;
+): T | D {
+  return source !== false ? source : placeholder as D;
 }

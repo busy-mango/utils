@@ -106,7 +106,7 @@ describe('shuffle', () => {
 
 describe('shuffle', () => {
   it('should shuffle the elements of the array', () => {
-    const source = [1, 2, 3, 4, 5];
+    const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     const res = shuffle(source);
     expect(res).not.toStrictEqual(source);
     expect(res).toHaveLength(source.length);
