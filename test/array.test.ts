@@ -5,7 +5,7 @@ import { compact, theLast, dedup, includes, shuffle, sample, zip } from '../src/
 describe('compact should remove falsey values from the array', () => {
   it('', () => {
     expect(
-      compact([1, 2, false, 3, '', 0]),
+      compact([1, 2, 0, null, 3, undefined, false]),
     ).toStrictEqual(
       [1, 2, 3],
     );

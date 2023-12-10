@@ -28,6 +28,14 @@ export interface ComparatorFunc<T = unknown> {
   (pre: T, cur: T): boolean;
 }
 
+/**
+ * Utility type.
+ * Represents a constrained function interface that imposes constraints on the shape of a generic function
+ */
+export interface ConstrainedFunc<
+  T extends (...args: any[]) => ReturnType<T>
+> { (...args: any[]): ReturnType<T> }
+
 /** 
  * Utility type.
  * It will output the key with value type `A` in `T`.

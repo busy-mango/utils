@@ -3,30 +3,30 @@ import { isNil, isNotUndefined } from "@busymango/is-esm";
 import type { ComparatorFunc, FalseValue } from "./types";
 
 /**
- * Removes falsey values from the given array and returns a new array. 
- * @param source The array to compact.
- * @returns A new array with falsey values removed.
- */ 
+ * Removes falsy values (false, null, 0, "", undefined, and NaN) from an array.
+ * @param source - The input array to compact.
+ * @returns An array with falsy values removed.
+ */
 export function compact<T = unknown>(source: (T | FalseValue)[]): T[] {
   return source.filter(Boolean) as T[];
 }
 
-/** 
- * Returns the last element of the given array, or undefined if the array is empty. 
- * @param source The array to retrieve the last element from. 
- * @returns The last element of the array, or undefined if the array is empty. 
+/**
+ * Returns the last element of an array or undefined if the array is empty.
+ * @param source - The input array.
+ * @returns The last element of the array or undefined if the array is empty.
  */ 
 export function theLast<T = unknown>(source?: T[]): T | undefined {
   const { length } = source ?? [];
   return source?.[length - 1] ?? undefined;
 }
 
-/** 
- * Removes duplicate elements from the given array based on the provided comparator function. 
- * @param source The array to remove duplicates from. 
- * @param comparator The function used to compare elements for duplication. 
- * @returns A new array with duplicate elements removed. 
- */ 
+/**
+ * Removes duplicate elements from an array based on a comparator function.
+ * @param source - The input array.
+ * @param comparator - A function used to compare elements for equality.
+ * @returns An array with duplicate elements removed.
+ */
 export function dedup<T = unknown>(
   source: T[] = [],
   comparator: ComparatorFunc<T> = (pre, cur) => pre === cur,
@@ -39,12 +39,12 @@ export function dedup<T = unknown>(
   return res;
 }
 
-/** 
- * Checks if the given array includes an element that satisfies the provided predicate function. 
- * @param source The array to search for the element. 
- * @param predicate The function used to test each element. 
- * @returns True if the array includes an element that satisfies the predicate, false otherwise. 
- */ 
+/**
+ * Checks if an array includes an element that satisfies a given condition.
+ * @param source - The input array.
+ * @param predicate - A function that tests whether an element satisfies the condition.
+ * @returns True if the array includes an element that satisfies the condition, otherwise false.
+ */
 export function includes<T = unknown>(
   source: T[] = [],
   predicate: (value: T, index: number, source: T[]) => unknown,
@@ -53,9 +53,9 @@ export function includes<T = unknown>(
 }
 
 /**
- * Shuffles an array using the Fisher-Yates algorithm.
- * @param source The array to shuffle.
- * @returns The shuffled array.
+ * Shuffles the elements of an array.
+ * @param source - The input array to shuffle.
+ * @returns A new array with the elements randomly rearranged.
  */
 export function shuffle<T = unknown>(source: T[] = []): T[] {
   // Create a copy of the source array to avoid modifying the original array
@@ -72,10 +72,10 @@ export function shuffle<T = unknown>(source: T[] = []): T[] {
 }
 
 /**
- * Returns a random sample of elements from the given array.
- * @param source The array to sample from.
- * @param size The number of elements to include in the sample. Defaults to 1.
- * @returns An array containing the sampled elements.
+ * Returns a random sample of elements from an array.
+ * @param source - The input array.
+ * @param size - The number of elements to sample.
+ * @returns A new array with randomly selected elements.
  */
 export function sample<T = unknown>(
   source: T[] = [],
@@ -88,10 +88,8 @@ export function sample<T = unknown>(
 }
 
 /**
- * Combines multiple arrays into a single array of tuples, where the i-th tuple contains
- * the i-th element from each of the input arrays.
- *
- * @param source The arrays to be combined.
+ * Combines multiple arrays into an array of tuples, where each tuple contains the i-th element from each input array.
+ * @param source - Arrays to zip together.
  * @returns An array of tuples.
  */
 export function zip<T = unknown>(...source: T[][]) {
