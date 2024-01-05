@@ -1,6 +1,6 @@
 {
   "name": "@busymango/utils",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "files": [
     "dist",
@@ -30,9 +30,9 @@
     "vitest": "^1.0.4"
   },
   "dependencies": {
-    "@busymango/is-esm": "^0.1.5"
+    "@busymango/is-esm": "^0.1.7"
   },
   "peerDependencies": {
-    "@busymango/is-esm": ">=0.1.5"
+    "@busymango/is-esm": ">=0.1.7"
   }
 }

@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@busymango/is-esm':
-    specifier: ^0.1.5
-    version: 0.1.5
+    specifier: ^0.1.7
+    version: 0.1.7
 
 devDependencies:
   '@vitest/coverage-v8':
@@ -63,8 +63,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@busymango/is-esm@0.1.5:
-    resolution: {integrity: sha512-UQ6EBhSHWQjw01+zkHZUU0Gpwe7GnmtvvFKwrNTE1zNdXmGr8jC9KOwUmlaj6Txr3FJsse7D9SBQkNM1LbJ0YA==}
+  /@busymango/is-esm@0.1.7:
+    resolution: {integrity: sha512-Rsh+TkWFbr6J5JtzndBPxz/t6ZnLv3XTMYwrSFk6OdzxIvp7ZTCGHf+E+YptY2mUZehuRTyv+D8QwS27cjKkZg==}
     dev: false
 
   /@esbuild/android-arm64@0.19.8:

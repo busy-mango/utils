@@ -10,3 +10,4 @@ export * from './src/string';
 export * from './src/tree';
 export * from './src/types';
 export * from './src/scope';
+export * from './src/func';

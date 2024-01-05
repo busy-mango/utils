@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import{ isArray, isValidKey, isString } from '@busymango/is-esm';
-import { compact, theLast, dedup, includes, shuffle, sample, zip } from '../src/array';
+import { compact, theLast, dedup, includes, shuffle, sample, zip, keyBy } from '../src/array';
 
 describe('compact should remove falsey values from the array', () => {
   it('', () => {
@@ -175,3 +175,23 @@ describe('zip', () => {
     expect(zipped).toStrictEqual(expected);
   });
 });
+
+describe('keyBy', () => {
+  it('keyBy should correctly index the array elements by the specified key', () => {
+    const inputArray = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+
+    const result = keyBy(inputArray, (item) => item.id.toString(), (item) => item.name);
+  
+    expect(result['1']).toStrictEqual('Alice');
+    expect(result['2']).toStrictEqual('Bob');
+  })
+
+  it('keyBy should use the default value if theValue function is not provided', () => {
+    const inputArray = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+
+    const result = keyBy(inputArray, (item) => item.id.toString());
+  
+    expect(result['1']).toStrictEqual({ id: 1, name: 'Alice' });
+    expect(result['2']).toStrictEqual({ id: 2, name: 'Bob' });
+  })
+})
