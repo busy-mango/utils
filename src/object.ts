@@ -1,7 +1,5 @@
 import { OmitBy, ExcludeKey } from './types';
 
-import { isArray } from '@busymango/is-esm';
-
 /**
  * Merges multiple partial objects into a new object of type T.
  * @param source Multiple partial objects to merge.
@@ -36,9 +34,4 @@ export function omit<T extends object, S = never>(
   }
 
   return res as Res;
-}
-
-export function clone<T = unknown>(source: T): T {
-  if (isArray(source)) return source.map(clone) as T;
-  return source;
 }

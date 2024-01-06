@@ -1,6 +1,7 @@
 import { isNil, isNotUndefined } from "@busymango/is-esm";
 
 import type { ComparatorFunc, FalseValue } from "./types";
+import { assign } from './object';
 
 /**
  * Removes falsy values (false, null, 0, "", undefined, and NaN) from an array.
@@ -15,7 +16,7 @@ export function compact<T = unknown>(source: (T | FalseValue)[]): T[] {
  * Returns the last element of an array or undefined if the array is empty.
  * @param source - The input array.
  * @returns The last element of the array or undefined if the array is empty.
- */ 
+ */
 export function theLast<T = unknown>(source?: T[]): T | undefined {
   const { length } = source ?? [];
   return source?.[length - 1] ?? undefined;
@@ -84,7 +85,7 @@ export function sample<T = unknown>(
   // If size is less than 1, return an empty array
   if (!(size >= 1)) return [];
   // Shuffle the source array & Return a portion of the shuffled array with the specified size
-  return shuffle(source).slice(0, size); 
+  return shuffle(source).slice(0, size);
 }
 
 /**
@@ -95,7 +96,7 @@ export function sample<T = unknown>(
 export function zip<T = unknown>(...source: T[][]) {
   // Find the maximum length of the input arrays.
   const max = Math.max(...source.map((e => e.length)));
-  
+
   // Create an array of tuples, where the i-th tuple contains the i-th element from each of the input arrays.
   return Array.from({ length: max }).map(
     (_, i) => source.map(e => e[i]).filter(isNotUndefined),
@@ -126,10 +127,9 @@ export function keyBy<T = unknown, S extends string = string, V = T>(
   theValue?: ((current: T) => V)
 ) {
   return source.reduce(
-    (accom, iterator) => ({
-      ...accom,
-      [theKey(iterator)]: theValue?.(iterator) ?? iterator,
-    }),
+    (accom, iterator) => assign(accom, {
+      [theKey(iterator)]: theValue?.(iterator) ?? iterator
+    } as Record<S, V>),
     {} as Record<S, V>,
   );
 }
