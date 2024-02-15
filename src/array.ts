@@ -133,3 +133,20 @@ export function keyBy<T = unknown, S extends string = string, V = T>(
     {} as Record<S, V>,
   );
 }
+
+
+/**
+ * Sorts the given array based on the result of the provided serialization function.
+ * @template T Type of array elements
+ * @param source The array to be sorted
+ * @param serialize The serialization function used to convert array elements into comparable numeric values
+ */
+export function sortBy<T>(
+  source: T[],
+  serialize: (item: T) => number | undefined
+) {
+  // Sorts the array using the provided serialization function
+  source.sort(
+    (pre, cur) => (serialize(pre) ?? Infinity) - (serialize(cur) ?? Infinity)
+  );
+}

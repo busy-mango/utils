@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import{ isArray, isValidKey, isString } from '@busymango/is-esm';
-import { compact, theLast, dedup, includes, shuffle, sample, zip, keyBy } from '../src/array';
+import { compact, theLast, dedup, includes, shuffle, sample, zip, keyBy, sortBy } from '../src/array';
 
 describe('compact should remove falsey values from the array', () => {
   it('', () => {
@@ -195,3 +195,31 @@ describe('keyBy', () => {
     expect(result['2']).toStrictEqual({ id: 2, name: 'Bob' });
   })
 })
+
+describe('sortBy', () => {
+  // Sample array to be sorted
+  const source = [
+    { name: 'Unknown1' },
+    { name: 'John', age: 30 },
+    { name: 'Unknown2' },
+    { name: 'Alice', age: 25 },
+    { name: 'Bob', age: 35 },
+  ];
+
+  it('sortBy should sort source', () => {
+    // Serialization function: returns age property of each object
+    const serialize = ({ age }: { age?: number }) => age;
+
+    // Call the function to be tested
+    sortBy(source, serialize);
+    
+    // Assert that the array is sorted correctly
+    expect(source).toStrictEqual([
+      { name: 'Alice', age: 25 },
+      { name: 'John', age: 30 },
+      { name: 'Bob', age: 35 },
+      { name: 'Unknown1' },
+      { name: 'Unknown2' },
+    ]);
+  })
+});
