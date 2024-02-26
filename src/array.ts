@@ -121,7 +121,7 @@ export function zip<T = unknown>(...source: T[][]) {
  * // Result of keyIndexedObject: { '1': 'Alice', '2': 'Bob' }
  * ```
  */
-export function keyBy<T = unknown, S extends string = string, V = T>(
+export function keyBy<const T = unknown, S extends string = string, V = T>(
   source: T[],
   theKey: ((current: T) => S),
   theValue?: ((current: T) => V)
@@ -133,7 +133,6 @@ export function keyBy<T = unknown, S extends string = string, V = T>(
     {} as Record<S, V>,
   );
 }
-
 
 /**
  * Sorts the given array based on the result of the provided serialization function.

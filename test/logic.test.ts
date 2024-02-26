@@ -43,24 +43,26 @@ describe('or', () => {
 
 describe('ifnot', () => {
   it('should return the source value if it is not false', () => {
-    const source = 123;
-    expect(ifnot(source)).toBe(123);
+    const res = ifnot(123);
+    expect(res).toBe(123);
   });
 
   it('should return the placeholder value if the source is false', () => {
     const source = false;
     const placeholder = 'placeholder';
-    expect(ifnot(source, placeholder)).toBe('placeholder');
+    const res = ifnot(source, placeholder);
+    expect(res).toBe('placeholder');
   });
 
   it('should return undefined if the source is false and no placeholder is provided', () => {
-    const source = false;
-    expect(ifnot(source)).toBeUndefined();
+    const res = ifnot(false);
+    expect(res).toBeUndefined();
   });
 
   it('should return the source value if it is not false, even if the placeholder is provided', () => {
     const source = 'value';
     const placeholder = 'placeholder';
-    expect(ifnot(source, placeholder)).toBe('value');
+    const res = ifnot(source, placeholder)
+    expect(res).toBe('value');
   });
 });
