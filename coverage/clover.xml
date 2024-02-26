@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1708940685949" clover="3.2.0">
-  <project timestamp="1708940685949" name="All files">
+<coverage generated="1708944743713" clover="3.2.0">
+  <project timestamp="1708944743713" name="All files">
     <metrics statements="643" coveredstatements="633" conditionals="95" coveredconditionals="88" methods="34" coveredmethods="34" elements="772" coveredelements="755" complexity="0" loc="643" ncloc="643" packages="1" files="9" classes="9"/>
     <file name="array.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/array.ts">
       <metrics statements="151" coveredstatements="151" conditionals="28" coveredconditionals="28" methods="10" coveredmethods="10"/>
@@ -200,9 +200,9 @@
       <line num="27" count="3" type="stmt"/>
       <line num="28" count="3" type="stmt"/>
       <line num="29" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="30" count="38" type="stmt"/>
-      <line num="31" count="38" type="stmt"/>
-      <line num="32" count="38" type="stmt"/>
+      <line num="30" count="23" type="stmt"/>
+      <line num="31" count="23" type="stmt"/>
+      <line num="32" count="23" type="stmt"/>
       <line num="33" count="3" type="stmt"/>
       <line num="34" count="3" type="cond" truecount="1" falsecount="0"/>
       <line num="35" count="4" type="stmt"/>
@@ -211,19 +211,19 @@
       <line num="38" count="4" type="stmt"/>
       <line num="39" count="3" type="stmt"/>
       <line num="40" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="41" count="34" type="stmt"/>
-      <line num="42" count="34" type="stmt"/>
-      <line num="43" count="34" type="stmt"/>
-      <line num="44" count="34" type="stmt"/>
-      <line num="45" count="34" type="cond" truecount="1" falsecount="0"/>
+      <line num="41" count="19" type="stmt"/>
+      <line num="42" count="19" type="stmt"/>
+      <line num="43" count="19" type="stmt"/>
+      <line num="44" count="19" type="stmt"/>
+      <line num="45" count="19" type="cond" truecount="1" falsecount="0"/>
       <line num="46" count="2" type="stmt"/>
       <line num="47" count="2" type="stmt"/>
-      <line num="48" count="34" type="stmt"/>
-      <line num="49" count="34" type="cond" truecount="1" falsecount="0"/>
-      <line num="50" count="29" type="stmt"/>
-      <line num="51" count="29" type="cond" truecount="2" falsecount="0"/>
-      <line num="52" count="34" type="stmt"/>
-      <line num="53" count="34" type="stmt"/>
+      <line num="48" count="19" type="stmt"/>
+      <line num="49" count="19" type="cond" truecount="1" falsecount="0"/>
+      <line num="50" count="14" type="stmt"/>
+      <line num="51" count="14" type="cond" truecount="2" falsecount="0"/>
+      <line num="52" count="19" type="stmt"/>
+      <line num="53" count="19" type="stmt"/>
       <line num="54" count="3" type="stmt"/>
       <line num="55" count="3" type="stmt"/>
       <line num="56" count="3" type="stmt"/>
