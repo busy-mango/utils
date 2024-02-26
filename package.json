@@ -23,6 +23,7 @@
     "publish:pre": "pnpm oxlint --fix && pnpm coverage && pnpm build"
   },
   "devDependencies": {
+    "@types/ungap__structured-clone": "^1.2.0",
     "@vitest/coverage-v8": "^1.0.4",
     "happy-dom": "^12.10.3",
     "oxlint": "^0.0.22",
@@ -31,7 +32,8 @@
     "vitest": "^1.0.4"
   },
   "dependencies": {
-    "@busymango/is-esm": "^0.1.7"
+    "@busymango/is-esm": "^0.1.7",
+    "@ungap/structured-clone": "^1.2.0"
   },
   "peerDependencies": {
     "@busymango/is-esm": ">=0.1.7"

@@ -1,3 +1,6 @@
+import { isFunction } from '@busymango/is-esm';
+import { deserialize, serialize } from "@ungap/structured-clone";
+
 import { OmitBy, ExcludeKey } from './types';
 
 /**
@@ -34,4 +37,22 @@ export function omit<T extends object, S = never>(
   }
 
   return res as Res;
+}
+
+/**
+ * Copies the given object or value deeply.
+ * If the browser supports the `structuredClone` function, it uses it to perform deep cloning.
+ * Otherwise, it uses the `polyfillStructuredClone` function to perform deep cloning.
+ * @param source The source object or value to be copied.
+ * @param options Optional parameters to configure the deep cloning options.
+ * @returns The deep-cloned object or value.
+ */
+export function clone<const T = unknown>(
+  source: T,
+  // About `transfer`: https://github.com/ungap/structured-clone
+  options?: StructuredSerializeOptions & { json?: boolean; lossy?: boolean },
+): T {
+  // Check if the current environment supports the `structuredClone` function
+  const checked = typeof structuredClone !== 'undefined' && isFunction(structuredClone);
+  return checked ? structuredClone(source) : deserialize(serialize(source, options));
 }

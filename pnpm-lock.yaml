@@ -1,11 +1,21 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@busymango/is-esm':
     specifier: ^0.1.7
     version: 0.1.7
+  '@ungap/structured-clone':
+    specifier: ^1.2.0
+    version: 1.2.0
 
 devDependencies:
+  '@types/ungap__structured-clone':
+    specifier: ^1.2.0
+    version: 1.2.0
   '@vitest/coverage-v8':
     specifier: ^1.0.4
     version: 1.0.4(vitest@1.0.4)
@@ -15,6 +25,9 @@ devDependencies:
   oxlint:
     specifier: ^0.0.22
     version: 0.0.22
+  structured-clone:
+    specifier: link:@types/@ungap/structured-clone
+    version: link:@types/@ungap/structured-clone
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -465,6 +478,14 @@ packages:
   /@types/istanbul-lib-coverage@2.0.5:
     resolution: {integrity: sha512-zONci81DZYCZjiLe0r6equvZut0b+dBRPBN5kBDjsONnutYNtJMoWQ9uR2RkL1gLG9NMTzvf+29e5RFfPbeKhQ==}
     dev: true
+
+  /@types/ungap__structured-clone@1.2.0:
+    resolution: {integrity: sha512-ZoaihZNLeZSxESbk9PUAPZOlSpcKx81I1+4emtULDVmBLkYutTcMlCj2K9VNlf9EWODxdO6gkAqEaLorXwZQVA==}
+    dev: true
+
+  /@ungap/structured-clone@1.2.0:
+    resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+    dev: false
 
   /@vitest/coverage-v8@1.0.4(vitest@1.0.4):
     resolution: {integrity: sha512-xD6Yuql6RW0Ir/JJIs6rVrmnG2/KOWJF+IRX1oJQk5wGKGxbtdrYPbl+WTUn/4ICCQ2G20zbE1e8/nPNyAG5Vg==}
