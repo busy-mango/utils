@@ -1,6 +1,6 @@
 {
   "name": "@busymango/utils",
-  "version": "0.0.15",
+  "version": "0.1.0",
   "type": "module",
   "files": [
     "dist",
@@ -20,16 +20,26 @@
     "test": "vitest",
     "build": "tsc && vite build",
     "coverage": "vitest run --coverage",
+    "eslint": "eslint --fix --ext .ts,.tsx ./",
     "publish:pre": "pnpm oxlint --fix && pnpm coverage && pnpm build"
   },
   "devDependencies": {
     "@types/ungap__structured-clone": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "@vitest/coverage-v8": "^1.0.4",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "eslint-plugin-unused-imports": "^3.1.0",
     "happy-dom": "^12.10.3",
-    "oxlint": "^0.0.22",
+    "oxlint": "^0.2.15",
+    "prettier": "^3.2.5",
     "typescript": "^5.3.3",
-    "vite": "^5.0.7",
-    "vitest": "^1.0.4"
+    "vite": "^5.2.8",
+    "vitest": "^1.4.0"
   },
   "dependencies": {
     "@busymango/is-esm": "^0.1.7",

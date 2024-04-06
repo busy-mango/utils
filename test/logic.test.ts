@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { and, or, ifnot } from '../src/logic';
+
+import { and, ifnot, or } from '../src/logic';
 
 describe('and', () => {
   it('should return true if all elements satisfy the predicate', () => {
@@ -62,7 +63,7 @@ describe('ifnot', () => {
   it('should return the source value if it is not false, even if the placeholder is provided', () => {
     const source = 'value';
     const placeholder = 'placeholder';
-    const res = ifnot(source, placeholder)
+    const res = ifnot(source, placeholder);
     expect(res).toBe('value');
   });
 });

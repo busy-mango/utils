@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { capitalize, encrypt } from '../src/string';
 
 describe('capitalize', () => {
@@ -12,10 +13,18 @@ describe('capitalize', () => {
 
 describe('encrypt', () => {
   it('should encrypt a portion of the string', () => {
-    expect(encrypt('hello world', { start: 6, end: 11, placeholder: '*' })).toBe('hello *****');
-    expect(encrypt('hello world', { start: 0, end: 5, placeholder: '#' })).toBe('##### world');
-    expect(encrypt('hello world', { start: 6, placeholder: '*' })).toBe('hello *****');
-    expect(encrypt('hello world', { end: 5, placeholder: '#' })).toBe('##### world');
+    expect(
+      encrypt('hello world', { start: 6, end: 11, placeholder: '*' })
+    ).toBe('hello *****');
+    expect(encrypt('hello world', { start: 0, end: 5, placeholder: '#' })).toBe(
+      '##### world'
+    );
+    expect(encrypt('hello world', { start: 6, placeholder: '*' })).toBe(
+      'hello *****'
+    );
+    expect(encrypt('hello world', { end: 5, placeholder: '#' })).toBe(
+      '##### world'
+    );
     expect(encrypt('hello world', { start: 6, end: 11 })).toBe('hello *****');
     expect(encrypt('hello world', { start: 11, end: 6 })).toBe('hello world');
     expect(encrypt('hello world', { start: 0, end: 0 })).toBe('hello world');

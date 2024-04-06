@@ -1,7 +1,7 @@
-import { isNil, isNotUndefined } from "@busymango/is-esm";
+import { isEmptyArray, isNil, isNotUndefined } from '@busymango/is-esm';
 
-import type { ComparatorFunc, FalseValue } from "./types";
 import { assign } from './object';
+import type { ComparatorFunc, FalseValue, IKey } from './types';
 
 /**
  * Removes falsy values (false, null, 0, "", undefined, and NaN) from an array.
@@ -10,6 +10,13 @@ import { assign } from './object';
  */
 export function compact<T = unknown>(source: (T | FalseValue)[]): T[] {
   return source.filter(Boolean) as T[];
+}
+
+/**
+ * Get the first item in an array or a default value
+ */
+export function theFirst<T = unknown>(source?: T[]): T | undefined {
+  return source?.[0];
 }
 
 /**
@@ -30,7 +37,7 @@ export function theLast<T = unknown>(source?: T[]): T | undefined {
  */
 export function dedup<T = unknown>(
   source: T[] = [],
-  comparator: ComparatorFunc<T> = (pre, cur) => pre === cur,
+  comparator: ComparatorFunc<T> = (pre, cur) => pre === cur
 ) {
   const res: T[] = [];
   for (const iterator of source) {
@@ -48,7 +55,7 @@ export function dedup<T = unknown>(
  */
 export function includes<T = unknown>(
   source: T[] = [],
-  predicate: (value: T, index: number, source: T[]) => unknown,
+  predicate: (value: T, index: number, source: T[]) => unknown
 ): boolean {
   return source.findIndex(predicate) >= 0;
 }
@@ -78,10 +85,7 @@ export function shuffle<T = unknown>(source: T[] = []): T[] {
  * @param size - The number of elements to sample.
  * @returns A new array with randomly selected elements.
  */
-export function sample<T = unknown>(
-  source: T[] = [],
-  size: number = 1,
-): T[] {
+export function sample<T = unknown>(source: T[] = [], size: number = 1): T[] {
   // If size is less than 1, return an empty array
   if (!(size >= 1)) return [];
   // Shuffle the source array & Return a portion of the shuffled array with the specified size
@@ -95,11 +99,11 @@ export function sample<T = unknown>(
  */
 export function zip<T = unknown>(...source: T[][]) {
   // Find the maximum length of the input arrays.
-  const max = Math.max(...source.map((e => e.length)));
+  const max = Math.max(...source.map((e) => e.length));
 
   // Create an array of tuples, where the i-th tuple contains the i-th element from each of the input arrays.
-  return Array.from({ length: max }).map(
-    (_, i) => source.map(e => e[i]).filter(isNotUndefined),
+  return Array.from({ length: max }).map((_, i) =>
+    source.map((e) => e[i]).filter(isNotUndefined)
   );
 }
 
@@ -121,16 +125,17 @@ export function zip<T = unknown>(...source: T[][]) {
  * // Result of keyIndexedObject: { '1': 'Alice', '2': 'Bob' }
  * ```
  */
-export function keyBy<const T = unknown, S extends string = string, V = T>(
-  source: T[],
-  theKey: ((current: T) => S),
-  theValue?: ((current: T) => V)
-) {
+export function keyBy<const T, const K extends IKey, const V = T>(
+  source: readonly T[],
+  theKey: (current: T) => K,
+  theValue?: (current: T) => V
+): Record<K, V> {
   return source.reduce(
-    (accom, iterator) => assign(accom, {
-      [theKey(iterator)]: theValue?.(iterator) ?? iterator
-    } as Record<S, V>),
-    {} as Record<S, V>,
+    (acc, cur) =>
+      assign(acc, {
+        [theKey(cur)]: theValue?.(cur) ?? (cur as unknown as V),
+      } as Record<K, V>),
+    {} as Record<K, V>
   );
 }
 
@@ -149,3 +154,44 @@ export function sortBy<T>(
     (pre, cur) => (serialize(pre) ?? Infinity) - (serialize(cur) ?? Infinity)
   );
 }
+
+/**
+ * Sorts an array of items into groups. The return value is a map where the keys are
+ * the group ids the given getGroupId function produced and the value is an array of
+ * each item in that group.
+ */
+export const group = <T, Key extends IKey>(
+  array: readonly T[],
+  theKey: (item: T) => Key
+): Partial<Record<Key, T[]>> => {
+  return array.reduce(
+    (acc, item) => {
+      const key = theKey(item);
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(item);
+      return acc;
+    },
+    {} as Record<Key, T[]>
+  );
+};
+
+/**
+ * Returns all items from the first list that
+ * do not exist in the second list.
+ */
+export const contrast = <T>(
+  source: readonly T[],
+  target: readonly T[],
+  identity: (e: T) => IKey = (e: T) => e as IKey
+): T[] => {
+  if (isEmptyArray(source)) return [...target];
+  if (isEmptyArray(target)) return [...source];
+  const idList = target.reduce(
+    (acc, e) => ({
+      ...acc,
+      [identity(e)]: true,
+    }),
+    {} as Record<IKey, boolean>
+  );
+  return source.filter((e) => !idList[identity(e)]);
+};

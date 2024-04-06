@@ -1,6 +1,6 @@
-import { zip } from "./array";
-import { and, or } from "./logic";
-import { Split } from "./types";
+import { zip } from './array';
+import { and, or } from './logic';
+import type { Split } from './types';
 
 export class Scope<K extends string> {
   /**
@@ -16,10 +16,11 @@ export class Scope<K extends string> {
    * @param current The current value to be compared.
    * @returns A boolean indicating whether the values match.
    */
-  public isMatch = (define: K, current: K) => and(
-    zip(this.convert(define), this.convert(current)),
-    ([def, cur]) => def === '*' || def === cur,
-  )
+  public isMatch = (define: K, current: K) =>
+    and(
+      zip(this.convert(define), this.convert(current)),
+      ([def, cur]) => def === '*' || def === cur
+    );
 
   /**
    * Checks if the current value is contained within the defines array.
@@ -27,7 +28,6 @@ export class Scope<K extends string> {
    * @param current The current value to be checked.
    * @returns A boolean indicating whether the current value is contained within the defines array.
    */
-  public isContain = (defines: K[], current: K) => (
-    or(defines, (cur) => this.isMatch(cur, current))
-  )
+  public isContain = (defines: K[], current: K) =>
+    or(defines, (cur) => this.isMatch(cur, current));
 }

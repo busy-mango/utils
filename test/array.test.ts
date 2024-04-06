@@ -1,39 +1,47 @@
 import { describe, expect, it } from 'vitest';
-import{ isArray, isValidKey, isString } from '@busymango/is-esm';
-import { compact, theLast, dedup, includes, shuffle, sample, zip, keyBy, sortBy } from '../src/array';
+
+import { isArray, isString, isValidKey } from '@busymango/is-esm';
+
+import {
+  compact,
+  contrast,
+  dedup,
+  group,
+  includes,
+  keyBy,
+  sample,
+  shuffle,
+  sortBy,
+  theFirst,
+  theLast,
+  zip,
+} from '../src/array';
 
 describe('compact should remove falsey values from the array', () => {
   it('', () => {
-    expect(
-      compact([1, 2, 0, null, 3, undefined, false]),
-    ).toStrictEqual(
-      [1, 2, 3],
-    );
+    expect(compact([1, 2, 0, null, 3, undefined, false])).toStrictEqual([
+      1, 2, 3,
+    ]);
   });
 
   it('', () => {
-    expect(
-      compact(['apple', '', 'banana', false, '']),
-    ).toStrictEqual(
-      ['apple', 'banana'],
-    );
+    expect(compact(['apple', '', 'banana', false, ''])).toStrictEqual([
+      'apple',
+      'banana',
+    ]);
 
-    expect(
-      compact([null, undefined, false]),
-    ).toStrictEqual([]);
-  })
+    expect(compact([null, undefined, false])).toStrictEqual([]);
+  });
 });
 
 describe('theLast should return the last element of the array', () => {
   it('', () => {
     expect(theLast([1, 2, 3])).toStrictEqual(3);
 
-    expect(theLast(
-      ['apple', 'banana', 'orange']
-    )).toStrictEqual('orange');
-  
+    expect(theLast(['apple', 'banana', 'orange'])).toStrictEqual('orange');
+
     expect(theLast([])).toStrictEqual(undefined);
-  
+
     expect(theLast()).toStrictEqual(undefined);
   });
 });
@@ -43,46 +51,39 @@ describe('dedup should remove duplicate elements from the array', () => {
     expect(dedup([])).toStrictEqual([]);
 
     expect(dedup([1, 2, 3, 2, 4, 1])).toStrictEqual([1, 2, 3, 4]);
-  
-    expect(dedup(
-      ['apple', 'banana', 'apple', 'orange']
-    )).toStrictEqual(
-      ['apple', 'banana', 'orange'],
-    );
-    
-    expect(dedup(
-      [[1, 2], [1, 2], { id: '3' }, { id: '3', name: 3 }],
-      (pre, cur) => {
+
+    expect(dedup(['apple', 'banana', 'apple', 'orange'])).toStrictEqual([
+      'apple',
+      'banana',
+      'orange',
+    ]);
+
+    expect(
+      dedup([[1, 2], [1, 2], { id: '3' }, { id: '3', name: 3 }], (pre, cur) => {
         if (isArray(pre) && isArray(cur)) {
           return pre.length === cur.length && pre.every((v, i) => cur[i] === v);
         }
-        if (isValidKey('id',pre, isString) && isValidKey('id',cur, isString) ) {
+        if (
+          isValidKey('id', pre, isString) &&
+          isValidKey('id', cur, isString)
+        ) {
           return cur.id === pre.id;
         }
-  
+
         return pre === cur;
-      }
-    )).toStrictEqual(
-      [[1, 2], { id: '3' }],
-    );
+      })
+    ).toStrictEqual([[1, 2], { id: '3' }]);
   });
 });
 
 describe('includes should check if the array includes an element that satisfies the predicate', () => {
   it('', () => {
-    expect(includes(
-      [1, 2, 3, 4],
-      (value) => value > 2),
-    ).toBeTruthy();
-  
-    expect(includes(
-      [1, 2, 3],
-      (_, index) => index === 2),
-    ).toBeTruthy();
-  
-    expect(includes(
-      ['apple', 'banana', 'orange'],
-      (value) => value === 'grape'),
+    expect(includes([1, 2, 3, 4], (value) => value > 2)).toBeTruthy();
+
+    expect(includes([1, 2, 3], (_, index) => index === 2)).toBeTruthy();
+
+    expect(
+      includes(['apple', 'banana', 'orange'], (value) => value === 'grape')
     ).toBeFalsy();
     expect(includes([], (value) => value === 1)).toBeFalsy();
   });
@@ -125,7 +126,7 @@ describe('sample', () => {
     const size = 3;
     const source = [1, 2, 3, 4, 5];
     const res = sample(source, size);
-    
+
     expect(res).toHaveLength(size);
     expect(source).toContain(res[0]);
     expect(source).toContain(res[1]);
@@ -148,29 +149,24 @@ describe('zip', () => {
     const zipped = zip<string | number | boolean>(
       [1, 2, 3],
       ['a', 'b', 'c'],
-      [true, false, true],
+      [true, false, true]
     );
 
     expect(zipped).toEqual([
       [1, 'a', true],
       [2, 'b', false],
-      [3, 'c', true]
+      [3, 'c', true],
     ]);
   });
 
   it('should handle arrays of different lengths', () => {
     const zipped = zip<string | number | boolean>(
-      [1, 2, 3], 
+      [1, 2, 3],
       ['a', 'b'],
-      [true, false, true, false],
+      [true, false, true, false]
     );
 
-    const expected = [
-      [1, 'a', true],
-      [2, 'b', false],
-      [3, true],
-      [false]
-    ];
+    const expected = [[1, 'a', true], [2, 'b', false], [3, true], [false]];
 
     expect(zipped).toStrictEqual(expected);
   });
@@ -178,23 +174,33 @@ describe('zip', () => {
 
 describe('keyBy', () => {
   it('keyBy should correctly index the array elements by the specified key', () => {
-    const inputArray = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+    const inputArray = [
+      { id: 1, name: 'Alice' },
+      { id: 2, name: 'Bob' },
+    ];
 
-    const result = keyBy(inputArray, (item) => item.id.toString(), (item) => item.name);
-  
+    const result = keyBy(
+      inputArray,
+      (item) => item.id.toString(),
+      (item) => item.name
+    );
+
     expect(result['1']).toStrictEqual('Alice');
     expect(result['2']).toStrictEqual('Bob');
-  })
+  });
 
   it('keyBy should use the default value if theValue function is not provided', () => {
-    const inputArray = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+    const inputArray = [
+      { id: 1, name: 'Alice' },
+      { id: 2, name: 'Bob' },
+    ];
 
     const result = keyBy(inputArray, (item) => item.id.toString());
-  
+
     expect(result['1']).toStrictEqual({ id: 1, name: 'Alice' });
     expect(result['2']).toStrictEqual({ id: 2, name: 'Bob' });
-  })
-})
+  });
+});
 
 describe('sortBy', () => {
   // Sample array to be sorted
@@ -212,7 +218,7 @@ describe('sortBy', () => {
 
     // Call the function to be tested
     sortBy(source, serialize);
-    
+
     // Assert that the array is sorted correctly
     expect(source).toStrictEqual([
       { name: 'Alice', age: 25 },
@@ -221,5 +227,61 @@ describe('sortBy', () => {
       { name: 'Unknown1' },
       { name: 'Unknown2' },
     ]);
-  })
+  });
+});
+
+describe('group function', () => {
+  it('groups by provided attribute', () => {
+    const source = [
+      { key: 'a', word: 'hello' },
+      { key: 'b', word: 'hey' },
+      { key: 'b', word: 'bye' },
+      { key: 'a', word: 'oh' },
+      { key: 'c', word: 'ok' },
+    ];
+
+    const res = group(source, ({ key }) => key);
+
+    expect(res.a?.length).toEqual(2);
+    expect(res.b?.length).toEqual(2);
+    expect(res.c?.length).toEqual(1);
+    expect(res.c?.[0].word).toEqual('ok');
+  });
+});
+
+describe('theFirst function', () => {
+  it('returns first item in list', () => {
+    expect(
+      theFirst([
+        { game: 'a', score: 100 },
+        { game: 'b', score: 200 },
+      ])
+    ).toStrictEqual({ game: 'a', score: 100 });
+  });
+});
+
+describe('contrast function', () => {
+  it('handles empty source', () => {
+    const result = contrast([], ['a']);
+    expect(result).toStrictEqual(['a']);
+  });
+  it('handles empty target', () => {
+    const result = contrast(['a'], []);
+    expect(result).toStrictEqual(['a']);
+  });
+  it('returns all items from root that dont exist in other', () => {
+    const result = contrast(['a', 'b', 'c'], ['c', 'd', 'e']);
+    expect(result).toStrictEqual(['a', 'b']);
+  });
+  it('uses identity function', () => {
+    const code = (word: string) => ({ word });
+    const decode = ({ word }: { word: string }) => word;
+
+    const result = contrast(
+      [code('a'), code('b'), code('c')],
+      [code('c'), code('d'), code('e')],
+      decode
+    );
+    expect(result).toStrictEqual([code('a'), code('b')]);
+  });
 });

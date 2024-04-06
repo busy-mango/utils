@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { buffer2hex } from '../src/buffer';
 
 describe('buffer2hex', () => {

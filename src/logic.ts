@@ -6,10 +6,7 @@ import { isNonEmptyArray } from '@busymango/is-esm';
  * @param predicate The function used to test each element.
  * @returns True if all elements satisfy the predicate, false otherwise.
  */
-export function and<T = unknown>(
-  source: T[],
-  predicate: (val: T) => boolean,
-) {
+export function and<T = unknown>(source: T[], predicate: (val: T) => boolean) {
   return isNonEmptyArray(source) && source.every(predicate);
 }
 
@@ -19,10 +16,7 @@ export function and<T = unknown>(
  * @param predicate The function used to test each element.
  * @returns True if any element satisfies the predicate, false otherwise.
  */
-export function or<T = unknown>(
-  source: T[],
-  predicate: (val: T) => boolean,
-) {
+export function or<T = unknown>(source: T[], predicate: (val: T) => boolean) {
   return source.some(predicate);
 }
 
@@ -34,7 +28,9 @@ export function or<T = unknown>(
  */
 export function ifnot<const T = unknown, D = undefined>(
   source: T | false,
-  placeholder?: D,
+  placeholder?: D
 ) {
-  return (source !== false ? source : placeholder) as T extends false ? D : Exclude<T, false>;
+  return (source !== false ? source : placeholder) as T extends false
+    ? D
+    : Exclude<T, false>;
 }

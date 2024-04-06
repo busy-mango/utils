@@ -1,43 +1,43 @@
-import { ExtractKey } from "./types";
+import { isArray, isNil } from '@busymango/is-esm';
 
-import { isNil, isArray } from '@busymango/is-esm';
+import type { ExtractKey } from './types';
 
 type Key = string | number | bigint;
 
-/** 
- * Defines the fields for a node in the tree structure. 
+/**
+ * Defines the fields for a node in the tree structure.
  */
 type NodeFields<T, C> = {
   _children?: C;
   _id?: Extract<ExtractKey<T, Key>, string>;
   _parent?: Extract<ExtractKey<T, Key | undefined>, string>;
-}
+};
 
-/** 
- * Represents a tree node with its children. 
- */ 
+/**
+ * Represents a tree node with its children.
+ */
 export type TreeNode<T, C extends string> = T & {
   [X in C]?: TreeNode<T, C>[];
-}
+};
 
-/** 
- * Default field names for the tree structure. 
- */ 
+/**
+ * Default field names for the tree structure.
+ */
 const defs = {
-  _id: "id",
-  _parentid: "pid",
-  _children: "children",
-}
+  _id: 'id',
+  _parentid: 'pid',
+  _children: 'children',
+};
 
-/** 
- * Converts a flat source array to a tree structure. 
- * @param source The source array to convert. 
- * @param params Additional parameters for customizing the conversion. 
- * @returns The converted tree structure. 
- */ 
+/**
+ * Converts a flat source array to a tree structure.
+ * @param source The source array to convert.
+ * @param params Additional parameters for customizing the conversion.
+ * @returns The converted tree structure.
+ */
 export function source2tree<
   T,
-  C extends string = (typeof defs)['_children']
+  const C extends string = (typeof defs)['_children'],
 >(
   source: T[],
   params: {
@@ -46,25 +46,25 @@ export function source2tree<
 ) {
   const { names } = params;
 
-  // Define the current node type based on the provided children field. 
+  // Define the current node type based on the provided children field.
   type CurrentNode = T & {
     [X in C]: TreeNode<T, C>[];
-  }
+  };
 
-  // Get the field names or use defaults. 
-  const _id = names?._id ?? defs?._id as keyof T;
-  const _parentid = names?._parent ?? defs?._parentid as keyof T;
-  
-  const _children = names?._children ?? defs?._children as C;
+  // Get the field names or use defaults.
+  const _id = names?._id ?? (defs?._id as keyof T);
+  const _parentid = names?._parent ?? (defs?._parentid as keyof T);
 
-  // Initialize the tree structure and helper maps. 
+  const _children = names?._children ?? (defs?._children as C);
+
+  // Initialize the tree structure and helper maps.
   const tree: CurrentNode[] = [];
 
   const map = new Map<string, CurrentNode>();
 
   const temp = new Map<string, CurrentNode[]>();
 
-  // Iterate over the source array to build the tree structure. 
+  // Iterate over the source array to build the tree structure.
   for (const iterator of source) {
     const id = iterator[_id] as string;
     const parentid = iterator[_parentid] as string | undefined;
@@ -74,7 +74,7 @@ export function source2tree<
 
     map.set(id, current);
 
-    // If the parent ID is undefined, add the current node to the root level. 
+    // If the parent ID is undefined, add the current node to the root level.
     if (isNil(parentid)) {
       tree.push(current);
       continue;
@@ -98,11 +98,11 @@ export function source2tree<
     parent[_children].push(current);
   }
 
-  // Clear the temporary maps. 
+  // Clear the temporary maps.
   temp.clear();
   map.clear();
-  
-  // Return the converted tree structure. 
+
+  // Return the converted tree structure.
   return tree;
 }
 
@@ -112,10 +112,7 @@ export function source2tree<
  * @param callback The callback function to invoke for each node.
  * @param params Additional parameters for customizing the iteration.
  */
-export function treeEach<
-  T,
-  C extends string = (typeof defs)['_children']
->(
+export function treeEach<T, C extends string = (typeof defs)['_children']>(
   tree: TreeNode<T, C>[],
   callback: (item: TreeNode<T, C>, depth: number) => void,
   params: {
@@ -128,9 +125,9 @@ export function treeEach<
 
   const queue: CurrentNode[] = tree.map((item) => item);
 
-  const _children = names?._children ?? defs?._children as C;
+  const _children = names?._children ?? (defs?._children as C);
 
-  function run () {
+  function run() {
     const first = queue.shift();
     if (first) {
       const children = first[_children];
@@ -149,10 +146,7 @@ export function treeEach<
  * @param params Additional parameters for customizing the conversion.
  * @returns The converted flat source array.
  */
-export function tree2source<
-  T,
-  C extends string = (typeof defs)['_children']
->(
+export function tree2source<T, C extends string = (typeof defs)['_children']>(
   tree: TreeNode<T, C>[],
   params: {
     names?: NodeFields<T, C>;
@@ -162,7 +156,7 @@ export function tree2source<
 
   const { names } = params;
 
-  const _children = names?._children ?? defs?._children as C;
+  const _children = names?._children ?? (defs?._children as C);
 
   treeEach(
     tree,
@@ -170,8 +164,8 @@ export function tree2source<
       const { [_children]: children, ...others } = item;
       source.push(others as T);
     },
-    params,
-  )
+    params
+  );
 
   return source;
 }
@@ -183,15 +177,9 @@ export function tree2source<
  * @param params Additional parameters for customizing the filtering.
  * @returns The filtered tree structure.
  */
-export function treeFilter<
-  T,
-  C extends string = (typeof defs)['_children']
->(
+export function treeFilter<T, C extends string = (typeof defs)['_children']>(
   tree: TreeNode<T, C>[],
-  predicate: (
-    val: TreeNode<T, C>,
-    parent?: TreeNode<T, C>,
-  ) => unknown,
+  predicate: (val: TreeNode<T, C>, parent?: TreeNode<T, C>) => unknown,
   params: {
     names?: NodeFields<T, C>;
     parent?: TreeNode<T, C>;
@@ -199,7 +187,7 @@ export function treeFilter<
 ): TreeNode<T, C>[] {
   const { names, parent } = params;
 
-  const _children = names?._children ?? defs?._children as C;
+  const _children = names?._children ?? (defs?._children as C);
 
   return tree
     .map((item) => ({ ...item }))
@@ -208,7 +196,7 @@ export function treeFilter<
       if (isArray(children) && children.length > 0) {
         const current = treeFilter(children, predicate, {
           names,
-          parent: item
+          parent: item,
         });
 
         item[_children] = current as TreeNode<T, C>[C];

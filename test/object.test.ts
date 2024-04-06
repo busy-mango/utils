@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { assign, omit, clone } from '../src/object';
-import { isFunction } from '@busymango/is-esm';
+
+import { assign, clone, omit } from '../src/object';
 
 describe('assign', () => {
   it('should merge multiple partial objects into a new object', () => {
@@ -22,7 +22,7 @@ describe('assign', () => {
 describe('omit', () => {
   it('should create a new object by omitting properties that satisfy the condition', () => {
     const source = { name: 'John', age: 25, gender: 'male' };
-    const condition = (val: unknown, key: string): val is never => key === 'age';
+    const condition = (_: unknown, key: string): _ is never => key === 'age';
 
     const result = omit(source, condition);
     expect(result).toEqual({ name: 'John', gender: 'male' });
@@ -30,7 +30,7 @@ describe('omit', () => {
 
   it('should return the source object unchanged if no properties satisfy the condition', () => {
     const source = { name: 'John', age: 25, gender: 'male' };
-    const condition = (val: unknown, key: string): val is never  => key === 'city';
+    const condition = (_: unknown, key: string): _ is never => key === 'city';
 
     const result = omit(source, condition);
     expect(result).toEqual(source);
@@ -38,7 +38,7 @@ describe('omit', () => {
 
   it('should return an empty object if the source object is empty', () => {
     const source = {};
-    const condition = (val: unknown, key: string): val is never  => key === 'age';
+    const condition = (_: unknown, key: string): _ is never => key === 'age';
 
     const result = omit(source, condition);
     expect(result).toEqual({});
@@ -46,7 +46,7 @@ describe('omit', () => {
 });
 
 describe('clone function', () => {
-  type CircularModel = { foo: null | CircularModel }
+  type CircularModel = { foo: null | CircularModel };
 
   it('should perform deep cloning of an object', () => {
     const obj = { foo: { bar: 'baz' } };
@@ -105,7 +105,7 @@ describe('clone function', () => {
 
   it('should polyfill when the environment not supports', () => {
     // @ts-ignore
-    delete globalThis.structuredClone
+    delete globalThis.structuredClone;
 
     // should handle circular references
     const obj: CircularModel = { foo: null };

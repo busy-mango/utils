@@ -4,7 +4,7 @@ import { Scope } from '../src/scope';
 
 describe('SystemScope', () => {
   const scope = new Scope<string>();
-  
+
   it('should convert source string into an array', () => {
     const source = 'abc:def:ghi';
     const expected = ['abc', 'def', 'ghi'];
