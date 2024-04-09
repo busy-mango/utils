@@ -3,7 +3,7 @@ import type { ConstrainedFunc } from './types';
 type ClosureType<T extends ConstrainedFunc<T>> = {
   timer: number;
   scale: number;
-  this?: unknown;
+  that?: unknown;
   args?: Parameters<T>;
 };
 
@@ -15,7 +15,6 @@ export type CallParams = {
 };
 
 /**
- * @deprecated This method is not recommended for general use.
  * Before using this method, please ensure that you understand whether the implementation of this method meets your requirements.
  */
 export const debounce = <T extends ConstrainedFunc<T>>(func: T, wait = 300) => {
@@ -31,22 +30,22 @@ export const debounce = <T extends ConstrainedFunc<T>>(func: T, wait = 300) => {
 
   const flush = () => {
     cancel();
-    const { this: that } = closure;
+    const { that = this } = closure;
     return func.apply(that, closure.args!);
   };
 
-  function starer(this: unknown, ...args: Parameters<T>) {
+  function starer(this: unknown, ...args: Parameters<T>): void | ReturnType<T> {
     cancel();
     closure.args = args;
-    closure.this = this;
+    closure.that = this;
     const timestamp = Date.now();
     if (closure.scale < timestamp) {
       closure.scale = timestamp + wait;
     }
 
+    if (closure.scale > timestamp) return flush();
     closure.timer = requestAnimationFrame(() => {
-      const isRunTime = closure.scale > timestamp;
-      isRunTime ? flush() : starer(...args);
+      starer(...args);
     });
   }
 

@@ -85,8 +85,6 @@
     "import/first": "error",
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
-    // @typescript-eslint custom rules
-    "@typescript-eslint/no-unused-vars": "warn",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
@@ -97,8 +95,11 @@
         "argsIgnorePattern": "^_"
       }
     ],
+    // @typescript-eslint custom rules
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-for-in-array": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-unsafe-argument": "off",

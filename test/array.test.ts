@@ -91,7 +91,7 @@ describe('includes should check if the array includes an element that satisfies 
 
 describe('shuffle', () => {
   it('should shuffle the elements of the array', () => {
-    const source = [1, 2, 3, 4, 5];
+    const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const res = shuffle(source);
     expect(res).not.toStrictEqual(source);
     expect(res).toHaveLength(source.length);
