@@ -41,10 +41,24 @@ export function ifnot<const T = unknown, D = undefined>(
 }
 
 /**
- *
+ * Compares two values for equality.
+ * @param source The first value.
+ * @param target The second value.
+ * @returns True if the two values are equal, otherwise false.
  */
 export const isEqual = <T>(source: T, target: T): boolean => {
+  // Record references to objects that have already been compared, preventing infinite recursion due to circular references.
   const records: Set<unknown>[] = [];
+
+  const preventing = (pre: unknown, cur: unknown) => {
+    // If two references have already been compared, and you encounter a situation where they are compared again, you can determine that they are equal.
+    if (records.some((set) => set.has(pre) && set.has(cur))) {
+      return true;
+    } else {
+      records.push(new Set([pre, cur]));
+    }
+    return false;
+  };
 
   const compare = <T>(source: T, target: T): boolean => {
     // Primitive compared
@@ -52,17 +66,13 @@ export const isEqual = <T>(source: T, target: T): boolean => {
 
     // Array compared
     if (isArray(source) && isArray(target)) {
+      if (preventing(source, target)) return true;
       if (source.length !== target.length) return false;
       return source.every((cur, index) => compare(cur, target[index]));
     }
 
     if (isObject(target) && isObject(source)) {
-      // If two references have already been compared, and you encounter a situation where they are compared again, you can determine that they are equal.
-      if (records.some((set) => set.has(target) && set.has(source))) {
-        return true;
-      } else {
-        records.push(new Set([target, source]));
-      }
+      if (preventing(source, target)) return true;
 
       // RegExp compared
       if (isRegExp(source) && isRegExp(target)) {

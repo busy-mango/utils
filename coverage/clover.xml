@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1712643530821" clover="3.2.0">
-  <project timestamp="1712643530821" name="All files">
-    <metrics statements="733" coveredstatements="733" conditionals="148" coveredconditionals="148" methods="41" coveredmethods="41" elements="922" coveredelements="922" complexity="0" loc="733" ncloc="733" packages="1" files="10" classes="10"/>
+<coverage generated="1713613293819" clover="3.2.0">
+  <project timestamp="1713613293819" name="All files">
+    <metrics statements="727" coveredstatements="727" conditionals="149" coveredconditionals="149" methods="42" coveredmethods="42" elements="918" coveredelements="918" complexity="0" loc="727" ncloc="727" packages="1" files="10" classes="10"/>
     <file name="array.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/array.ts">
       <metrics statements="197" coveredstatements="197" conditionals="40" coveredconditionals="40" methods="14" coveredmethods="14"/>
       <line num="1" count="1" type="stmt"/>
@@ -223,7 +223,7 @@
       <line num="10" count="4" type="stmt"/>
     </file>
     <file name="func.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/func.ts">
-      <metrics statements="53" coveredstatements="53" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
+      <metrics statements="37" coveredstatements="37" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -241,45 +241,29 @@
       <line num="15" count="1" type="stmt"/>
       <line num="16" count="1" type="stmt"/>
       <line num="17" count="1" type="stmt"/>
-      <line num="18" count="1" type="stmt"/>
-      <line num="19" count="1" type="stmt"/>
-      <line num="20" count="1" type="cond" truecount="1" falsecount="0"/>
-      <line num="21" count="3" type="stmt"/>
-      <line num="22" count="3" type="stmt"/>
-      <line num="23" count="3" type="stmt"/>
+      <line num="18" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="19" count="3" type="stmt"/>
+      <line num="20" count="3" type="stmt"/>
+      <line num="21" count="3" type="cond" truecount="1" falsecount="0"/>
+      <line num="22" count="16" type="stmt"/>
+      <line num="23" count="16" type="stmt"/>
       <line num="24" count="3" type="stmt"/>
-      <line num="25" count="3" type="stmt"/>
-      <line num="26" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="27" count="33" type="stmt"/>
-      <line num="28" count="33" type="stmt"/>
-      <line num="29" count="33" type="stmt"/>
-      <line num="30" count="3" type="stmt"/>
-      <line num="31" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="32" count="4" type="stmt"/>
-      <line num="33" count="4" type="stmt"/>
-      <line num="34" count="4" type="stmt"/>
-      <line num="35" count="4" type="stmt"/>
+      <line num="25" count="3" type="cond" truecount="1" falsecount="0"/>
+      <line num="26" count="2" type="stmt"/>
+      <line num="27" count="2" type="stmt"/>
+      <line num="28" count="2" type="stmt"/>
+      <line num="29" count="3" type="stmt"/>
+      <line num="30" count="3" type="cond" truecount="1" falsecount="0"/>
+      <line num="31" count="14" type="stmt"/>
+      <line num="32" count="14" type="stmt"/>
+      <line num="33" count="14" type="stmt"/>
+      <line num="34" count="14" type="stmt"/>
+      <line num="35" count="3" type="stmt"/>
       <line num="36" count="3" type="stmt"/>
-      <line num="37" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="38" count="29" type="stmt"/>
-      <line num="39" count="29" type="stmt"/>
-      <line num="40" count="29" type="stmt"/>
-      <line num="41" count="29" type="stmt"/>
-      <line num="42" count="29" type="cond" truecount="1" falsecount="0"/>
-      <line num="43" count="2" type="stmt"/>
-      <line num="44" count="2" type="stmt"/>
-      <line num="45" count="29" type="stmt"/>
-      <line num="46" count="29" type="cond" truecount="2" falsecount="0"/>
-      <line num="47" count="27" type="cond" truecount="1" falsecount="0"/>
-      <line num="48" count="22" type="stmt"/>
-      <line num="49" count="27" type="stmt"/>
-      <line num="50" count="29" type="stmt"/>
-      <line num="51" count="3" type="stmt"/>
-      <line num="52" count="3" type="stmt"/>
-      <line num="53" count="3" type="stmt"/>
+      <line num="37" count="3" type="stmt"/>
     </file>
     <file name="logic.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/logic.ts">
-      <metrics statements="98" coveredstatements="98" conditionals="38" coveredconditionals="38" methods="5" coveredmethods="5"/>
+      <metrics statements="108" coveredstatements="108" conditionals="43" coveredconditionals="43" methods="6" coveredmethods="6"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -325,59 +309,69 @@
       <line num="43" count="1" type="stmt"/>
       <line num="44" count="1" type="stmt"/>
       <line num="45" count="1" type="stmt"/>
-      <line num="46" count="1" type="cond" truecount="1" falsecount="0"/>
-      <line num="47" count="24" type="stmt"/>
-      <line num="48" count="24" type="stmt"/>
-      <line num="49" count="24" type="cond" truecount="1" falsecount="0"/>
-      <line num="50" count="98" type="stmt"/>
-      <line num="51" count="98" type="cond" truecount="2" falsecount="0"/>
-      <line num="52" count="30" type="stmt"/>
-      <line num="53" count="30" type="stmt"/>
-      <line num="54" count="98" type="cond" truecount="2" falsecount="0"/>
-      <line num="55" count="4" type="cond" truecount="2" falsecount="0"/>
-      <line num="56" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="57" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="58" count="26" type="stmt"/>
-      <line num="59" count="98" type="cond" truecount="2" falsecount="0"/>
-      <line num="60" count="17" type="stmt"/>
-      <line num="61" count="17" type="cond" truecount="3" falsecount="0"/>
-      <line num="62" count="1" type="stmt"/>
-      <line num="63" count="17" type="cond" truecount="1" falsecount="0"/>
-      <line num="64" count="16" type="stmt"/>
-      <line num="65" count="16" type="stmt"/>
-      <line num="66" count="16" type="stmt"/>
-      <line num="67" count="16" type="stmt"/>
-      <line num="68" count="17" type="cond" truecount="2" falsecount="0"/>
-      <line num="69" count="2" type="stmt"/>
-      <line num="70" count="2" type="cond" truecount="1" falsecount="0"/>
-      <line num="71" count="14" type="stmt"/>
-      <line num="72" count="14" type="stmt"/>
-      <line num="73" count="17" type="cond" truecount="2" falsecount="0"/>
-      <line num="74" count="2" type="stmt"/>
-      <line num="75" count="2" type="cond" truecount="1" falsecount="0"/>
-      <line num="76" count="12" type="stmt"/>
-      <line num="77" count="12" type="stmt"/>
-      <line num="78" count="12" type="stmt"/>
-      <line num="79" count="12" type="stmt"/>
-      <line num="80" count="17" type="cond" truecount="2" falsecount="0"/>
-      <line num="81" count="17" type="cond" truecount="2" falsecount="0"/>
-      <line num="82" count="9" type="stmt"/>
-      <line num="83" count="9" type="stmt"/>
-      <line num="84" count="17" type="cond" truecount="1" falsecount="0"/>
-      <line num="85" count="67" type="cond" truecount="1" falsecount="0"/>
-      <line num="86" count="1" type="stmt"/>
-      <line num="87" count="1" type="cond" truecount="1" falsecount="0"/>
-      <line num="88" count="67" type="cond" truecount="1" falsecount="0"/>
-      <line num="89" count="3" type="stmt"/>
-      <line num="90" count="3" type="stmt"/>
-      <line num="91" count="67" type="cond" truecount="1" falsecount="0"/>
-      <line num="92" count="5" type="stmt"/>
-      <line num="93" count="5" type="cond" truecount="1" falsecount="0"/>
-      <line num="94" count="9" type="stmt"/>
-      <line num="95" count="98" type="stmt"/>
-      <line num="96" count="24" type="stmt"/>
-      <line num="97" count="24" type="stmt"/>
-      <line num="98" count="24" type="stmt"/>
+      <line num="46" count="1" type="stmt"/>
+      <line num="47" count="1" type="stmt"/>
+      <line num="48" count="1" type="stmt"/>
+      <line num="49" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="50" count="41" type="stmt"/>
+      <line num="51" count="41" type="stmt"/>
+      <line num="52" count="41" type="stmt"/>
+      <line num="53" count="41" type="cond" truecount="1" falsecount="0"/>
+      <line num="54" count="49" type="stmt"/>
+      <line num="55" count="49" type="cond" truecount="3" falsecount="0"/>
+      <line num="56" count="4" type="stmt"/>
+      <line num="57" count="49" type="cond" truecount="1" falsecount="0"/>
+      <line num="58" count="45" type="stmt"/>
+      <line num="59" count="45" type="stmt"/>
+      <line num="60" count="45" type="stmt"/>
+      <line num="61" count="49" type="stmt"/>
+      <line num="62" count="41" type="stmt"/>
+      <line num="63" count="41" type="cond" truecount="1" falsecount="0"/>
+      <line num="64" count="154" type="stmt"/>
+      <line num="65" count="154" type="cond" truecount="2" falsecount="0"/>
+      <line num="66" count="64" type="stmt"/>
+      <line num="67" count="64" type="stmt"/>
+      <line num="68" count="154" type="cond" truecount="2" falsecount="0"/>
+      <line num="69" count="24" type="cond" truecount="2" falsecount="0"/>
+      <line num="70" count="24" type="cond" truecount="2" falsecount="0"/>
+      <line num="71" count="19" type="cond" truecount="1" falsecount="0"/>
+      <line num="72" count="19" type="cond" truecount="1" falsecount="0"/>
+      <line num="73" count="40" type="stmt"/>
+      <line num="74" count="154" type="cond" truecount="2" falsecount="0"/>
+      <line num="75" count="25" type="cond" truecount="2" falsecount="0"/>
+      <line num="76" count="24" type="stmt"/>
+      <line num="77" count="24" type="stmt"/>
+      <line num="78" count="25" type="cond" truecount="2" falsecount="0"/>
+      <line num="79" count="3" type="stmt"/>
+      <line num="80" count="3" type="cond" truecount="1" falsecount="0"/>
+      <line num="81" count="21" type="stmt"/>
+      <line num="82" count="21" type="stmt"/>
+      <line num="83" count="25" type="cond" truecount="2" falsecount="0"/>
+      <line num="84" count="3" type="stmt"/>
+      <line num="85" count="3" type="cond" truecount="1" falsecount="0"/>
+      <line num="86" count="18" type="stmt"/>
+      <line num="87" count="18" type="stmt"/>
+      <line num="88" count="18" type="stmt"/>
+      <line num="89" count="18" type="stmt"/>
+      <line num="90" count="25" type="cond" truecount="2" falsecount="0"/>
+      <line num="91" count="25" type="cond" truecount="2" falsecount="0"/>
+      <line num="92" count="14" type="stmt"/>
+      <line num="93" count="14" type="stmt"/>
+      <line num="94" count="25" type="cond" truecount="1" falsecount="0"/>
+      <line num="95" count="72" type="cond" truecount="1" falsecount="0"/>
+      <line num="96" count="1" type="stmt"/>
+      <line num="97" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="98" count="72" type="cond" truecount="1" falsecount="0"/>
+      <line num="99" count="5" type="stmt"/>
+      <line num="100" count="5" type="stmt"/>
+      <line num="101" count="72" type="cond" truecount="1" falsecount="0"/>
+      <line num="102" count="8" type="stmt"/>
+      <line num="103" count="8" type="cond" truecount="1" falsecount="0"/>
+      <line num="104" count="15" type="stmt"/>
+      <line num="105" count="154" type="stmt"/>
+      <line num="106" count="41" type="stmt"/>
+      <line num="107" count="41" type="stmt"/>
+      <line num="108" count="41" type="stmt"/>
     </file>
     <file name="object.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/object.ts">
       <metrics statements="59" coveredstatements="59" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3"/>

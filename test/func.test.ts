@@ -13,12 +13,25 @@ describe('debounce', () => {
 
     const debounced = debounce((value: number = 0) => {
       closure.count += value;
-    }, 100);
+    }, 300);
 
     debounced.starer(2);
+    debounced.starer(2);
+    debounced.starer(2);
+    debounced.starer(2);
 
-    await sleep(200);
+    await sleep(400);
+
     expect(closure.count).toBe(2);
+
+    debounced.starer(2);
+    debounced.starer(2);
+    debounced.starer(2);
+    debounced.starer(2);
+
+    await sleep(400);
+
+    expect(closure.count).toBe(4);
   });
   it('the func run only lastone', async () => {
     const closure = {
@@ -28,7 +41,7 @@ describe('debounce', () => {
     const debounced = debounce((value: number = 0) => {
       closure.count++;
       return 2 * value;
-    });
+    }, 400);
 
     debounced.starer(2);
     debounced.starer(4);
