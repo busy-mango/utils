@@ -10,7 +10,7 @@ export default defineConfig({
         'src/css.ts',
         'src/dom.ts',
         'src/types.ts',
-        'src/constants/**',
+        'src/conversion.ts',
         'coverage/**',
         'dist/**',
         '**/[.]**',

@@ -29,13 +29,19 @@ export const MB2B = MB2KB * KB2B;
 export const S2MS = 1000;
 
 /**
- * Represents the frame rate in frames per second (FPS).
+ * Represents the conversion factor from minute (MIN) to milliseconds (MS).
+ * The value is set to 60000, as there are 60000 milliseconds in 1 minute.
+ */
+export const MIN2MS = 60 * S2MS;
+
+/**
+ * Represents the frame rate in frames per second (FPS) in Chrome.
  * The value is set to 60, indicating 60 frames per second.
  */
-export const FPS = 60;
+export const CHROME_FPS = 60;
 
 /**
  * Represents the conversion factor from frames to milliseconds (MS).
  * The value is calculated by dividing  S2MS  by  FRAME_RATE .
  */
-export const FRAME2MS = S2MS / FPS;
+export const FRAME2MS = S2MS / CHROME_FPS;
