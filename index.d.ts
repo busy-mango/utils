@@ -1,4 +1,5 @@
 export * from './src/array';
+export * from './src/async';
 export * from './src/buffer';
 export * from './src/conversion';
 export * from './src/css';
