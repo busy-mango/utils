@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1714374839503" clover="3.2.0">
-  <project timestamp="1714374839503" name="All files">
-    <metrics statements="727" coveredstatements="727" conditionals="149" coveredconditionals="149" methods="42" coveredmethods="42" elements="918" coveredelements="918" complexity="0" loc="727" ncloc="727" packages="1" files="10" classes="10"/>
+<coverage generated="1715236030103" clover="3.2.0">
+  <project timestamp="1715236030103" name="All files">
+    <metrics statements="731" coveredstatements="731" conditionals="147" coveredconditionals="147" methods="42" coveredmethods="42" elements="920" coveredelements="920" complexity="0" loc="731" ncloc="731" packages="1" files="10" classes="10"/>
     <file name="array.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/array.ts">
       <metrics statements="197" coveredstatements="197" conditionals="40" coveredconditionals="40" methods="14" coveredmethods="14"/>
       <line num="1" count="1" type="stmt"/>
@@ -374,7 +374,7 @@
       <line num="108" count="41" type="stmt"/>
     </file>
     <file name="object.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/object.ts">
-      <metrics statements="59" coveredstatements="59" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3"/>
+      <metrics statements="63" coveredstatements="63" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -384,10 +384,10 @@
       <line num="7" count="1" type="stmt"/>
       <line num="8" count="1" type="stmt"/>
       <line num="9" count="1" type="stmt"/>
-      <line num="10" count="1" type="stmt"/>
-      <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="11" count="9" type="stmt"/>
       <line num="12" count="9" type="stmt"/>
-      <line num="13" count="9" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
       <line num="14" count="1" type="stmt"/>
       <line num="15" count="1" type="stmt"/>
       <line num="16" count="1" type="stmt"/>
@@ -400,21 +400,21 @@
       <line num="23" count="1" type="stmt"/>
       <line num="24" count="1" type="stmt"/>
       <line num="25" count="1" type="stmt"/>
-      <line num="26" count="1" type="stmt"/>
-      <line num="27" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="26" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="27" count="3" type="stmt"/>
       <line num="28" count="3" type="stmt"/>
       <line num="29" count="3" type="stmt"/>
       <line num="30" count="3" type="stmt"/>
       <line num="31" count="3" type="stmt"/>
       <line num="32" count="3" type="stmt"/>
-      <line num="33" count="3" type="stmt"/>
-      <line num="34" count="3" type="cond" truecount="1" falsecount="0"/>
-      <line num="35" count="6" type="stmt"/>
-      <line num="36" count="6" type="cond" truecount="1" falsecount="0"/>
-      <line num="37" count="6" type="stmt"/>
+      <line num="33" count="3" type="cond" truecount="1" falsecount="0"/>
+      <line num="34" count="6" type="stmt"/>
+      <line num="35" count="6" type="cond" truecount="1" falsecount="0"/>
+      <line num="36" count="6" type="stmt"/>
+      <line num="37" count="3" type="stmt"/>
       <line num="38" count="3" type="stmt"/>
       <line num="39" count="3" type="stmt"/>
-      <line num="40" count="3" type="stmt"/>
+      <line num="40" count="1" type="stmt"/>
       <line num="41" count="1" type="stmt"/>
       <line num="42" count="1" type="stmt"/>
       <line num="43" count="1" type="stmt"/>
@@ -423,17 +423,21 @@
       <line num="46" count="1" type="stmt"/>
       <line num="47" count="1" type="stmt"/>
       <line num="48" count="1" type="stmt"/>
-      <line num="49" count="1" type="stmt"/>
-      <line num="50" count="1" type="cond" truecount="1" falsecount="0"/>
-      <line num="51" count="10" type="stmt"/>
-      <line num="52" count="10" type="stmt"/>
-      <line num="53" count="10" type="stmt"/>
-      <line num="54" count="10" type="stmt"/>
-      <line num="55" count="10" type="stmt"/>
-      <line num="56" count="10" type="cond" truecount="2" falsecount="0"/>
-      <line num="57" count="9" type="cond" truecount="1" falsecount="0"/>
-      <line num="58" count="1" type="stmt"/>
-      <line num="59" count="10" type="stmt"/>
+      <line num="49" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="50" count="11" type="stmt"/>
+      <line num="51" count="11" type="stmt"/>
+      <line num="52" count="11" type="stmt"/>
+      <line num="53" count="11" type="stmt"/>
+      <line num="54" count="11" type="stmt"/>
+      <line num="55" count="11" type="stmt"/>
+      <line num="56" count="11" type="stmt"/>
+      <line num="57" count="11" type="cond" truecount="1" falsecount="0"/>
+      <line num="58" count="2" type="stmt"/>
+      <line num="59" count="2" type="stmt"/>
+      <line num="60" count="2" type="stmt"/>
+      <line num="61" count="2" type="stmt"/>
+      <line num="62" count="2" type="stmt"/>
+      <line num="63" count="2" type="stmt"/>
     </file>
     <file name="parse.ts" path="/Users/mangosetsuna/Workspace/Busymango/utils/src/parse.ts">
       <metrics statements="32" coveredstatements="32" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>

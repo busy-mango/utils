@@ -115,4 +115,18 @@ describe('clone function', () => {
     expect(clonedObj).not.toBe(obj);
     expect(clonedObj.foo).toEqual(clonedObj);
   });
+
+  it('should clone proxy object to plain object', () => {
+    const obj = { foo: { bar: 'baz' } };
+    const proxy = new Proxy(obj, {
+      get: () => ({ bar: 'baz' }),
+      set: () => true,
+    });
+
+    const clonedObj = clone(proxy);
+    expect(clonedObj).toEqual(obj); // Ensure the cloned object is equal to the original
+    expect(clonedObj).not.toBe(obj); // Ensure the cloned object is not the same reference as the original
+    expect(clonedObj.foo).toEqual(obj.foo); // Ensure nested objects are also cloned
+    expect(clonedObj.foo).not.toBe(obj.foo); // Ensure nested objects are not the same reference as the original
+  });
 });

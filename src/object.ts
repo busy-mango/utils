@@ -1,4 +1,3 @@
-import { isFunction } from '@busymango/is-esm';
 import { deserialize, serialize } from '@ungap/structured-clone';
 
 import type { ExcludeKey, OmitBy } from './types';
@@ -52,8 +51,14 @@ export function clone<const T = unknown>(
   // About `transfer`: https://github.com/ungap/structured-clone
   options?: StructuredSerializeOptions & { json?: boolean; lossy?: boolean }
 ): T {
-  // Check if the current environment supports the `structuredClone` function
-  return typeof structuredClone !== 'undefined' && isFunction(structuredClone)
-    ? structuredClone(source)
-    : (deserialize(serialize(source, options)) as T);
+  // Maybe environment don't supports the `structuredClone` function
+  // And structuredClone clone `Porxy` will be error
+  try {
+    return structuredClone(source);
+  } catch (error) {
+    console.warn(
+      "The current environment don't supports the `structuredClone` function"
+    );
+  }
+  return deserialize(serialize(source, options)) as T;
 }
