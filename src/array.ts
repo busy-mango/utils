@@ -37,7 +37,7 @@ export function theLast<T = unknown>(source?: T[]): T | undefined {
  */
 export function dedup<T = unknown>(
   source: T[] = [],
-  comparator: ComparatorFunc<T> = (pre, cur) => pre === cur
+  comparator: ComparatorFunc<T> = Object.is
 ) {
   const res: T[] = [];
   for (const iterator of source) {
@@ -59,6 +59,23 @@ export function includes<T = unknown>(
 ): boolean {
   return source.findIndex(predicate) >= 0;
 }
+
+/**
+ * Finds the difference between two arrays based on a custom comparison function.
+ * @param source The source array.
+ * @param target The target array to compare against.
+ * @param compare A custom comparison function that returns true if two elements are considered equal.
+ *                Default is isEqual function.
+ * @returns An array containing elements that are present in either source or target array but not in both.
+ */
+export const difference = <T>(
+  source: T[],
+  target: T[],
+  comparator: (pre: T, cur: T) => boolean = Object.is
+): T[] =>
+  source
+    .filter((e) => !includes(target, (v) => comparator(v, e)))
+    .concat(target.filter((e) => !includes(source, (v) => comparator(v, e))));
 
 /**
  * Shuffles the elements of an array.

@@ -24,14 +24,14 @@ export const debounce = <T extends ConstrainedFunc<T>>(func: T, wait = 300) => {
 
   const flush = () => {
     cancel();
-    return closure.func!();
+    closure.func!();
   };
 
-  function starer(this: unknown, ...args: Parameters<T>): void | ReturnType<T> {
+  function starer(this: unknown, ...args: Parameters<T>): void {
     cancel();
     closure.func = func.bind(this, ...args) as T;
     closure.timer = setTimeout(closure.func, wait);
   }
 
-  return { cancel, starer, flush };
+  return { cancel, starer, flush, func, params: { wait } };
 };

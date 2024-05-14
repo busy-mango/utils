@@ -6,6 +6,7 @@ import {
   compact,
   contrast,
   dedup,
+  difference,
   group,
   includes,
   keyBy,
@@ -283,5 +284,59 @@ describe('contrast function', () => {
       decode
     );
     expect(result).toStrictEqual([code('a'), code('b')]);
+  });
+});
+
+describe('difference', () => {
+  it('should return the difference between two arrays with default comparator', () => {
+    const source = [1, 2, 3, 4];
+    const target = [3, 4, 5, 6];
+    const result = difference(source, target);
+    expect(result).toEqual([1, 2, 5, 6]);
+  });
+
+  it('should return the difference between two arrays with custom comparator', () => {
+    const source = [{ id: 1 }, { id: 2 }, { id: 3 }];
+    const target = [{ id: 3 }, { id: 4 }, { id: 5 }];
+    const comparator = (a: { id: number }, b: { id: number }) => a.id === b.id;
+    const result = difference(source, target, comparator);
+    expect(result).toEqual([{ id: 1 }, { id: 2 }, { id: 4 }, { id: 5 }]);
+  });
+
+  it('should return an empty array if both arrays are empty', () => {
+    const source: unknown[] = [];
+    const target: unknown[] = [];
+    const result = difference(source, target);
+    expect(result).toEqual([]);
+  });
+
+  it('should return the source array if the target array is empty', () => {
+    const source = [1, 2, 3];
+    const target: unknown[] = [];
+    const result = difference(source, target);
+    expect(result).toEqual([1, 2, 3]);
+  });
+
+  it('should return the target array if the source array is empty', () => {
+    const source: unknown[] = [];
+    const target = [4, 5, 6];
+    const result = difference(source, target);
+    expect(result).toEqual([4, 5, 6]);
+  });
+
+  it('should handle arrays with primitive types correctly', () => {
+    const source = ['a', 'b', 'c'];
+    const target = ['b', 'c', 'd'];
+    const result = difference(source, target);
+    expect(result).toEqual(['a', 'd']);
+  });
+
+  it('should handle arrays with complex objects correctly using a custom comparator', () => {
+    const source = [{ name: 'Alice' }, { name: 'Bob' }];
+    const target = [{ name: 'Bob' }, { name: 'Charlie' }];
+    const comparator = (a: { name: string }, b: { name: string }) =>
+      a.name === b.name;
+    const result = difference(source, target, comparator);
+    expect(result).toEqual([{ name: 'Alice' }, { name: 'Charlie' }]);
   });
 });

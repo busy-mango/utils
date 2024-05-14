@@ -34,13 +34,11 @@ describe('debounce', () => {
     expect(closure.count).toBe(4);
   });
   it('the func run only lastone', async () => {
-    const closure = {
-      count: 0,
-    };
+    const closure = { res: 0, count: 0 };
 
     const debounced = debounce((value: number = 0) => {
       closure.count++;
-      return 2 * value;
+      closure.res = 2 * value;
     }, 400);
 
     debounced.starer(2);
@@ -51,14 +49,17 @@ describe('debounce', () => {
 
     await sleep(400);
     expect(closure.count).toBe(1);
-    expect(debounced.flush()).toBe(32);
+    debounced.flush();
+    expect(closure.res).toBe(32);
   });
   it('the object this must extends', async () => {
     const number = 2;
+    const closure = { res: 0 };
     const debounced = debounce(function (this: number) {
-      return this * 2;
+      closure.res = this * 2;
     });
     debounced.starer.bind(number)();
-    expect(debounced.flush()).toBe(4);
+    debounced.flush();
+    expect(closure.res).toBe(4);
   });
 });
