@@ -1,6 +1,7 @@
 import {
   isArray,
   isDate,
+  isFunction,
   isNonEmptyArray,
   isObject,
   isRegExp,
@@ -61,6 +62,12 @@ export const isEqual = <T>(source: T, target: T): boolean => {
   };
 
   const compare = <T>(source: T, target: T): boolean => {
+    // Function compared
+    if (isFunction(source) && isFunction(target)) {
+      if (preventing(source, target)) return true;
+      else return Object.is(source, target);
+    }
+
     // Primitive compared
     if (Object.is(source, target)) return true;
 
