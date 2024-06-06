@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { assign, clone, omit } from '../src/object';
+import { isNil, isNumber, isString } from '@busymango/is-esm';
+
+import { assign, clone, iOmit, omit, pick } from '../src/object';
 
 describe('assign', () => {
   it('should merge multiple partial objects into a new object', () => {
@@ -19,28 +21,62 @@ describe('assign', () => {
   });
 });
 
+describe('pick', () => {
+  it('should pick specified properties from the source object', () => {
+    const source = { a: 1, b: 2, c: 3 };
+    const result = pick(source, ['a', 'c']);
+    expect(result).toEqual({ a: 1, c: 3 });
+  });
+
+  it('should return an empty object if no keys are specified', () => {
+    const source = { a: 1, b: 2, c: 3 };
+    const result = pick(source, []);
+    expect(result).toEqual({});
+  });
+
+  it('should handle readonly array of keys', () => {
+    const source = { a: 1, b: 2, c: 3 };
+    const keys: readonly ('a' | 'c')[] = ['a', 'c'];
+    const result = pick(source, keys);
+    expect(result).toEqual({ a: 1, c: 3 });
+  });
+});
+
 describe('omit', () => {
+  it('should omit specified properties from the source object', () => {
+    const source = { a: 1, b: 2, c: 3 };
+    const result = omit(source, ['a', 'c']);
+    expect(result).toEqual({ b: 2 });
+  });
+
+  it('should return the original object if no keys are specified', () => {
+    const source = { a: 1, b: 2, c: 3 };
+    const result = omit(source, []);
+    expect(result).toEqual(source);
+  });
+
+  it('should handle readonly array of keys', () => {
+    const source = { a: 1, b: 2, c: 3 };
+    const keys: readonly ('a' | 'c')[] = ['a', 'c'];
+    const result = omit(source, keys);
+    expect(result).toEqual({ b: 2 });
+  });
+});
+
+describe('iOmit', () => {
   it('should create a new object by omitting properties that satisfy the condition', () => {
     const source = { name: 'John', age: 25, gender: 'male' };
-    const condition = (_: unknown, key: string): _ is never => key === 'age';
-
-    const result = omit(source, condition);
-    expect(result).toEqual({ name: 'John', gender: 'male' });
+    expect(iOmit(source, isNumber)).toEqual({ name: 'John', gender: 'male' });
   });
 
   it('should return the source object unchanged if no properties satisfy the condition', () => {
     const source = { name: 'John', age: 25, gender: 'male' };
-    const condition = (_: unknown, key: string): _ is never => key === 'city';
-
-    const result = omit(source, condition);
-    expect(result).toEqual(source);
+    const result = iOmit(source, isString);
+    expect(result).toEqual({ age: 25 });
   });
 
   it('should return an empty object if the source object is empty', () => {
-    const source = {};
-    const condition = (_: unknown, key: string): _ is never => key === 'age';
-
-    const result = omit(source, condition);
+    const result = iOmit({}, isNil);
     expect(result).toEqual({});
   });
 });
