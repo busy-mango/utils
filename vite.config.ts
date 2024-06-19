@@ -11,6 +11,7 @@ export default defineConfig({
         'src/dom.ts',
         'src/types.ts',
         'src/conversion.ts',
+        'src/deprecated.ts',
         'coverage/**',
         'dist/**',
         '**/[.]**',

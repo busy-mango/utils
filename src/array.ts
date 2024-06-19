@@ -1,5 +1,11 @@
-import { isEmptyArray, isNil, isNotUndefined } from '@busymango/is-esm';
+import {
+  isArray,
+  isEmptyArray,
+  isNil,
+  isNotUndefined,
+} from '@busymango/is-esm';
 
+import { sizeOf } from './logic';
 import { assign } from './object';
 import type { ComparatorFunc, FalseValue, IKey } from './types';
 
@@ -10,6 +16,20 @@ import type { ComparatorFunc, FalseValue, IKey } from './types';
  */
 export function compact<T = unknown>(source: (T | FalseValue)[]): T[] {
   return source.filter(Boolean) as T[];
+}
+
+/**
+ * Returns an array containing the provided source, ensuring it is an array.
+ * If the source is already an array, returns it as-is. If the source is a single
+ * element or undefined, wraps it in an array and returns.
+ *
+ * @param source The source array or single element to process.
+ * @returns An array containing the source element(s).
+ */
+export function iArray<T = unknown>(...args: [T | T[]] | []) {
+  const [source] = args;
+  if (sizeOf(args) === 0) return [];
+  return isArray(source) ? source : [source];
 }
 
 /**
@@ -53,7 +73,7 @@ export function dedup<T = unknown>(
  * @param predicate - A function that tests whether an element satisfies the condition.
  * @returns True if the array includes an element that satisfies the condition, otherwise false.
  */
-export function includes<T = unknown>(
+export function contains<T = unknown>(
   source: T[] = [],
   predicate: (value: T, index: number, source: T[]) => unknown
 ): boolean {
@@ -74,8 +94,8 @@ export const difference = <T>(
   comparator: (pre: T, cur: T) => boolean = Object.is
 ): T[] =>
   source
-    .filter((e) => !includes(target, (v) => comparator(v, e)))
-    .concat(target.filter((e) => !includes(source, (v) => comparator(v, e))));
+    .filter((e) => !contains(target, (v) => comparator(v, e)))
+    .concat(target.filter((e) => !contains(source, (v) => comparator(v, e))));
 
 /**
  * Shuffles the elements of an array.
@@ -193,8 +213,7 @@ export const group = <T, Key extends IKey>(
 };
 
 /**
- * Returns all items from the first list that
- * do not exist in the second list.
+ * Returns all items from the first list that do not exist in the second list.
  */
 export const contrast = <T>(
   source: readonly T[],

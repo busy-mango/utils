@@ -4,11 +4,12 @@ import { isArray, isString, isValidKey } from '@busymango/is-esm';
 
 import {
   compact,
+  contains,
   contrast,
   dedup,
   difference,
   group,
-  includes,
+  iArray,
   keyBy,
   sample,
   shuffle,
@@ -17,6 +18,32 @@ import {
   theLast,
   zip,
 } from '../src/array';
+
+describe('iArray function', () => {
+  it('should return an array if source is already an array', () => {
+    const arr = [1, 2, 3];
+    expect(iArray(arr)).toEqual(arr);
+  });
+
+  it('should wrap a single element in an array', () => {
+    const element = 123;
+    expect(iArray(element)).toEqual([element]);
+  });
+
+  it('should wrap nil in an array', () => {
+    expect(iArray(null)).toEqual([null]);
+    expect(iArray(undefined)).toEqual([undefined]);
+  });
+
+  it('should return an empty array if no source is provided', () => {
+    expect(iArray()).toEqual([]);
+  });
+
+  it('should handle complex objects by wrapping them in an array', () => {
+    const obj = { key: 'value' };
+    expect(iArray(obj)).toEqual([obj]);
+  });
+});
 
 describe('compact should remove falsey values from the array', () => {
   it('', () => {
@@ -77,16 +104,16 @@ describe('dedup should remove duplicate elements from the array', () => {
   });
 });
 
-describe('includes should check if the array includes an element that satisfies the predicate', () => {
+describe('contains should check if the array includes an element that satisfies the predicate', () => {
   it('', () => {
-    expect(includes([1, 2, 3, 4], (value) => value > 2)).toBeTruthy();
+    expect(contains([1, 2, 3, 4], (value) => value > 2)).toBeTruthy();
 
-    expect(includes([1, 2, 3], (_, index) => index === 2)).toBeTruthy();
+    expect(contains([1, 2, 3], (_, index) => index === 2)).toBeTruthy();
 
     expect(
-      includes(['apple', 'banana', 'orange'], (value) => value === 'grape')
+      contains(['apple', 'banana', 'orange'], (value) => value === 'grape')
     ).toBeFalsy();
-    expect(includes([], (value) => value === 1)).toBeFalsy();
+    expect(contains([], (value) => value === 1)).toBeFalsy();
   });
 });
 

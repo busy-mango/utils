@@ -4,7 +4,9 @@ import {
   isFunction,
   isNonEmptyArray,
   isObject,
+  isPlainObject,
   isRegExp,
+  isString,
 } from '@busymango/is-esm';
 
 /**
@@ -34,12 +36,33 @@ export function or<T = unknown>(source: T[], predicate: (val: T) => boolean) {
  * @returns The source value if it is not false, otherwise the placeholder value or undefined.
  */
 export function ifnot<const T = unknown, D = undefined>(
-  source: T | false,
+  source: T,
   placeholder?: D
 ) {
-  type R = T extends false ? D : Exclude<T, false>;
+  type V = Exclude<T, false>;
+  type R = T extends false ? (V extends never ? D : V | D) : V;
   return (source === false ? placeholder : source) as R;
 }
+
+/**
+ * Returns the size or length of the provided source object based on its type.
+ * Supports arrays, strings, Maps, Sets, and plain objects.
+ * For arrays and strings, returns the length.
+ * For Maps and Sets, returns the size.
+ * For plain objects, returns the number of own enumerable properties.
+ * If the source is of an unsupported type or undefined, returns 0.
+ *
+ * @param source The object whose size or length needs to be determined.
+ * @returns The size or length of the source object, or 0 if unsupported or undefined.
+ */
+export const sizeOf = (source: unknown) => {
+  if (isArray(source)) return source.length;
+  if (isString(source)) return source.length;
+  if (source instanceof Map) return source.size;
+  if (source instanceof Set) return source.size;
+  if (isPlainObject(source)) return Object.keys(source).length;
+  return 0;
+};
 
 /**
  * Compares two values for equality.

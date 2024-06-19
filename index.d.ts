@@ -3,6 +3,7 @@ export * from './src/async';
 export * from './src/buffer';
 export * from './src/conversion';
 export * from './src/css';
+export * from './src/deprecated';
 export * from './src/dom';
 export * from './src/func';
 export * from './src/logic';

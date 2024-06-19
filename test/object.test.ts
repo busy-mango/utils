@@ -76,8 +76,8 @@ describe('iOmit', () => {
   });
 
   it('should return an empty object if the source object is empty', () => {
-    const result = iOmit({}, isNil);
-    expect(result).toEqual({});
+    const result = iOmit({ a: null as null | '1', c: '1' }, isNil);
+    expect(new URLSearchParams(result).toString()).toEqual('c=1');
   });
 });
 

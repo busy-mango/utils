@@ -62,10 +62,16 @@ export type OmitOf<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 /**
  * Utility type.
- * It creates a new type by omitting properties from `T` that have values assignable to `S`.
+ * Constructs a new type by omitting properties from T based on a specified condition C.
+ * It creates a type that excludes properties where the property's value matches the condition C.
  */
-export type OmitBy<T, S> = {
-  [K in ExcludeKey<T, S>]: T[K];
+export type OmitBy<T, C> = {
+  [K in keyof T as Extract<T[K], C> extends never ? K : never]: T[K];
+} & {
+  [K in keyof T as Extract<T[K], C> extends never ? never : K]?: Exclude<
+    T[K],
+    C
+  >;
 };
 
 /**
