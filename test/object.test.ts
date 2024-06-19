@@ -192,9 +192,8 @@ describe('iSearchParams function', () => {
 
   it('should initialize from a single string array', () => {
     const init = ['key1=value1', 'key2=value2', 'invalidEntry'];
-    const result = iSearchParams(init);
-    expect(result instanceof URLSearchParams).toBe(true);
-    expect(result?.toString()).toBe('key1=value1&key2=value2');
+    expect(iSearchParams(init)?.toString()).toBe('key1=value1&key2=value2');
+    expect(iSearchParams([' charset=UTF-8'])?.get('charset')).toEqual('UTF-8');
   });
 
   it('should initialize from a plain object', () => {
