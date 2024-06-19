@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { isNil, isNumber, isString } from '@busymango/is-esm';
 
-import { assign, clone, iOmit, omit, pick } from '../src/object';
+import { assign, clone, iOmit, iSearchParams, omit, pick } from '../src/object';
 
 describe('assign', () => {
   it('should merge multiple partial objects into a new object', () => {
@@ -164,5 +164,55 @@ describe('clone function', () => {
     expect(clonedObj).not.toBe(obj); // Ensure the cloned object is not the same reference as the original
     expect(clonedObj.foo).toEqual(obj.foo); // Ensure nested objects are also cloned
     expect(clonedObj.foo).not.toBe(obj.foo); // Ensure nested objects are not the same reference as the original
+  });
+});
+
+describe('iSearchParams function', () => {
+  it('should return URLSearchParams if init is already a URLSearchParams object', () => {
+    const params = new URLSearchParams('key1=value1&key2=value2');
+    expect(iSearchParams(params)?.toString()).toBe(params?.toString());
+  });
+
+  it('should initialize from a single string', () => {
+    const init = 'key1=value1&key2=value2';
+    const result = iSearchParams(init);
+    expect(result instanceof URLSearchParams).toBe(true);
+    expect(result?.toString()).toBe(init);
+  });
+
+  it('should initialize from an array of string arrays', () => {
+    const init = [
+      ['key1', 'value1'],
+      ['key2', 'value2'],
+    ];
+    const result = iSearchParams(init);
+    expect(result instanceof URLSearchParams).toBe(true);
+    expect(result?.toString()).toBe('key1=value1&key2=value2');
+  });
+
+  it('should initialize from a single string array', () => {
+    const init = ['key1=value1', 'key2=value2', 'invalidEntry'];
+    const result = iSearchParams(init);
+    expect(result instanceof URLSearchParams).toBe(true);
+    expect(result?.toString()).toBe('key1=value1&key2=value2');
+  });
+
+  it('should initialize from a plain object', () => {
+    const init = {
+      key1: 'value1',
+      key2: 'value2',
+      key3: null,
+      key4: undefined,
+    };
+    const result = iSearchParams(init);
+    expect(result instanceof URLSearchParams).toBe(true);
+    expect(result?.toString()).toBe('key1=value1&key2=value2');
+  });
+
+  it('should return undefined for unsupported initialization data', () => {
+    expect(iSearchParams(undefined)).toBe(undefined);
+    expect(iSearchParams(null)).toBe(undefined);
+    expect(iSearchParams(123)).toBe(undefined);
+    expect(iSearchParams([])).toBe(undefined);
   });
 });

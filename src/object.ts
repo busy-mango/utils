@@ -1,5 +1,15 @@
+import {
+  isArray,
+  isEmpty,
+  isNil,
+  isPlainObject,
+  isString,
+  isStringArray,
+  isURLSearchParams,
+} from '@busymango/is-esm';
 import { deserialize, serialize } from '@ungap/structured-clone';
 
+import { keyBy } from './array';
 import type { ExcludeKey, OmitBy, PartialPick } from './types';
 
 /**
@@ -88,4 +98,43 @@ export function iOmit<T extends object, S = never>(
     }
   }
   return res as OmitBy<T, S>;
+}
+
+/**
+ * Constructs and returns a URLSearchParams object based on the provided initialization data.
+ * Supports initializing with various types: URLSearchParams, string, string arrays, and plain objects.
+ * Returns undefined if the initialization data does not match any supported type.
+ *
+ * @param init The initialization data for URLSearchParams.
+ * @returns A URLSearchParams object constructed from the provided data, or undefined if invalid.
+ */
+export function iSearchParams(init: unknown) {
+  if (isEmpty(init)) return;
+  if (
+    isString(init) ||
+    isURLSearchParams(init) ||
+    (isArray(init) && init.every(isStringArray))
+  ) {
+    return new URLSearchParams(init);
+  }
+  // Parses arrays of key-value pairs
+  if (isStringArray(init)) {
+    return new URLSearchParams(
+      init
+        .filter((e) => e.includes('='))
+        .map((e) => e.trim())
+        .join('&')
+    );
+  }
+  if (isPlainObject(init)) {
+    const source = Object.entries(iOmit(init, isNil));
+    return new URLSearchParams(
+      keyBy(
+        source,
+        ([key]) => key,
+        ([, value]) => value?.toString?.() as string
+      )
+    );
+  }
+  return;
 }
