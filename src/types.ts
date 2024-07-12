@@ -82,6 +82,14 @@ export type OmitNil<T> = Pick<T, ExcludeKey<T, Nil>>;
 
 /**
  * Utility type.
+ * It creates a new type by picking properties from `T` specified in `K` and making them mandatory.
+ */
+export type RequiredPick<T, K extends keyof T> = Required<{
+  [P in K]: T[P];
+}>;
+
+/**
+ * Utility type.
  * It creates a new type by picking properties from `T` specified in `K` and making them optional.
  */
 export type PartialPick<T, K extends keyof T> = {
