@@ -2,8 +2,8 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { sleep } from '../src/async';
 import { debounce } from '../src/func';
+import { sleep } from '../src/promise';
 
 describe('debounce', () => {
   it('the debounce func should run success', async () => {

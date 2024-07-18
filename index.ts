@@ -1,5 +1,4 @@
 export * from './src/array';
-export * from './src/async';
 export * from './src/buffer';
 export * from './src/conversion';
 export * from './src/css';
@@ -9,6 +8,7 @@ export * from './src/func';
 export * from './src/logic';
 export * from './src/object';
 export * from './src/parse';
+export * from './src/promise';
 export * from './src/scope';
 export * from './src/string';
 export * from './src/tree';
