@@ -10,7 +10,7 @@ import {
 import { deserialize, serialize } from '@ungap/structured-clone';
 
 import { keyBy } from './array';
-import type { ExcludeKey, OmitBy, PartialPick } from './types';
+import type { AssertFunc, OmitBy, PartialPick } from './types';
 
 /**
  * Merges multiple partial objects into a new object of type T.
@@ -72,11 +72,6 @@ export function omit<T extends object, K extends keyof T>(
     delete res[key];
   }
   return res;
-}
-
-interface AssertFunc<T extends object, S = never> {
-  (val: unknown, key: keyof T): boolean;
-  (val: unknown, key: ExcludeKey<T, S>): val is S;
 }
 
 /**

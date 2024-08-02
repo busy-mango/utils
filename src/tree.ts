@@ -1,4 +1,4 @@
-import { isArray, isNil } from '@busymango/is-esm';
+import { isArray, isNil, isNonEmptyArray } from '@busymango/is-esm';
 
 import type { ExtractKey } from './types';
 
@@ -187,20 +187,17 @@ export function treeFilter<T, C extends string = (typeof defs)['_children']>(
 ): TreeNode<T, C>[] {
   const { names, parent } = params;
 
-  const _children = names?._children ?? (defs?._children as C);
+  const iChildren = names?._children ?? (defs?._children as C);
 
   return tree
     .map((item) => ({ ...item }))
     .filter((item) => {
-      const children = item[_children];
+      const children = item[iChildren];
       if (isArray(children) && children.length > 0) {
-        const current = treeFilter(children, predicate, {
-          names,
-          parent: item,
-        });
-
-        item[_children] = current as TreeNode<T, C>[C];
-        if (current.length > 0) return true;
+        const params = { names, parent: item };
+        const current = treeFilter(children, predicate, params);
+        item[iChildren] = current as TreeNode<T, C>[C];
+        if (isNonEmptyArray(current)) return true;
       }
 
       return predicate(item, parent);

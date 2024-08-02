@@ -4,7 +4,7 @@ import type { PartialRecord } from './types';
  * Create a dom and set attribute
  * @param {string} name - dom tag name
  * @param {Record<string, string>} attrs - dom attribute
- * @param {HTMLElement} container - dom container
+ * @param {HTMLElement} container - dom container, element is automatically append only when `container` is not nill
  * @returns {HTMLElement} - the dom instance
  */
 function create(
@@ -24,6 +24,4 @@ function create(
 }
 
 /** dom operate */
-export const dom = {
-  create,
-};
+export const dom = { create };

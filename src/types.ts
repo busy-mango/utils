@@ -163,3 +163,7 @@ export type KeyPath<
   T,
   P extends string = Predicate,
 > = `${Assemble<T>}:${P | '*' | '!'}`;
+
+export interface AssertFunc<T, S = never> {
+  (val: unknown, key?: keyof T): val is S;
+}
